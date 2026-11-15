@@ -27,7 +27,7 @@ O **FFBL** (uma paródia carinhosa de "JBL") transforma a sala de voz do seu Dis
 | Quem | O que vive |
 |---|---|
 | 🎧 **Jogador vanilla** (sem plugins) | Só entra na sala de voz do Discord e **escuta a música**, como em qualquer festa. Não precisa instalar nada. |
-| 🛠️ **Jogador com o FFBL** | Tem o **iPod no jogo**: pede músicas, pula, pausa, muda o volume, vê o **chat da sala** e a **fila**. |
+| 🛠️ **Jogador com o FFBL** | Tem o **iPod no jogo**: pede músicas, pula, pausa, muda o volume e vê a **música atual** e a **fila**. |
 | 📺 **Jogador com o FFBL + Penumbra** | Também vê o **telão**, uma tela de verdade no cenário (usa o seu minion *Plush Cushion*), mostrando a capa da música ou uma imagem sua. |
 
 Assim a cena de RP funciona para todo mundo: quem tem mods enxerga mais, e quem joga puro escuta a mesma música.
@@ -35,7 +35,7 @@ Assim a cena de RP funciona para todo mundo: quem tem mods enxerga mais, e quem 
 ## ✨ O que ele faz
 
 - 📱 **iPod no jogo** com roda de clique: ⏮ ⏭ ⏯, volume e playlist.
-- 💬 **Chat da sala do Discord** dentro do jogo, com o nome do seu personagem.
+- 💬 **Pedidos com o nome do seu personagem**: o que você pede aparece na sala do Discord com o nome do seu personagem.
 - 🎶 **Fila compartilhada**: peça por nome ou link do YouTube.
 - 📺 **Telão no cenário**: imagem padrão, capa da música atual ou uma imagem sua. Dá para mudar tamanho, posição e giro.
 - 🌍 **Português, English, 日本語, Deutsch e Français.**

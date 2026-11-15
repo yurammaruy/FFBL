@@ -27,13 +27,13 @@
 | Qui | Expérience |
 |---|---|
 | 🎧 **Joueur vanilla** (sans plugin) | Rejoint le salon vocal Discord et **écoute la musique**. Rien à installer. |
-| 🛠️ **Joueur avec FFBL** | A l'**iPod en jeu** : demandes, passer, pause, volume, **chat du salon** et **file d'attente**. |
+| 🛠️ **Joueur avec FFBL** | A l'**iPod en jeu** : demandes, passer, pause, volume, **morceau en cours** et **file d'attente**. |
 | 📺 **FFBL + Penumbra** | Voit aussi l'**écran**, un vrai écran dans le décor (votre mascotte *Plush Cushion* rhabillée) affichant la pochette ou votre image. |
 
 ## ✨ Fonctionnalités
 
 - 📱 **iPod en jeu** avec molette : ⏮ ⏭ ⏯, volume, playlist.
-- 💬 **Chat du salon Discord** en jeu, avec le nom de votre personnage.
+- 💬 **Demandes au nom de votre personnage** : ce que vous demandez apparaît dans le salon Discord avec le nom de votre personnage.
 - 🎶 **File partagée** : par nom ou lien YouTube.
 - 📺 **Écran dans le décor** : image par défaut, pochette en cours ou votre image ; taille, position et rotation réglables.
 - 🌍 **Português, English, 日本語, Deutsch, Français.**

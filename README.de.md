@@ -27,13 +27,13 @@
 | Wer | Erlebnis |
 |---|---|
 | 🎧 **Vanilla-Spieler** (ohne Plugins) | Betritt einfach den Discord-Sprachkanal und **hört die Musik**. Nichts zu installieren. |
-| 🛠️ **Spieler mit FFBL** | Hat den **iPod im Spiel**: Wünschen, Überspringen, Pause, Lautstärke, **Raum-Chat** und **Warteschlange**. |
+| 🛠️ **Spieler mit FFBL** | Hat den **iPod im Spiel**: Wünschen, Überspringen, Pause, Lautstärke, **aktuelles Lied** und **Warteschlange**. |
 | 📺 **FFBL + Penumbra** | Sieht zusätzlich die **Leinwand**, einen echten Bildschirm in der Szenerie (ein umgestalteter *Plush Cushion*-Minion) mit Cover oder eigenem Bild. |
 
 ## ✨ Funktionen
 
 - 📱 **iPod im Spiel** mit Click-Wheel: ⏮ ⏭ ⏯, Lautstärke, Playlist.
-- 💬 **Discord-Chat** im Spiel, mit dem Namen deines Charakters.
+- 💬 **Wünsche unter dem Namen deines Charakters**: Was du wünschst, erscheint im Discord-Raum mit dem Namen deines Charakters.
 - 🎶 **Gemeinsame Warteschlange**: per Name oder YouTube-Link.
 - 📺 **Leinwand in der Szenerie**: Standardbild, aktuelles Cover oder eigenes Bild; Größe, Position und Drehung einstellbar.
 - 🌍 **Português, English, 日本語, Deutsch, Français.**

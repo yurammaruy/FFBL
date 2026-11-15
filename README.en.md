@@ -27,13 +27,13 @@
 | Who | Experience |
 |---|---|
 | 🎧 **Vanilla player** (no plugins) | Just joins the Discord voice room and **hears the music**. Nothing to install. |
-| 🛠️ **Player with FFBL** | Gets the **in-game iPod**: request, skip, pause, volume, **room chat** and **queue**. |
+| 🛠️ **Player with FFBL** | Gets the **in-game iPod**: request, skip, pause, volume, and see the **current song** and the **queue**. |
 | 📺 **FFBL + Penumbra** | Also sees the **screen**, a real display in the scenery (it re-skins your *Plush Cushion* minion) showing the album art or your own image. |
 
 ## ✨ Features
 
 - 📱 **In-game iPod** with click wheel: ⏮ ⏭ ⏯, volume, playlist.
-- 💬 **Discord room chat** in-game, using your character name.
+- 💬 **Requests under your character name**: what you request shows up in the Discord room with your character's name.
 - 🎶 **Shared queue**: request by name or YouTube link.
 - 📺 **Screen in the scenery**: default image, current cover or your own image; adjustable size, position and rotation.
 - 🌍 **Português, English, 日本語, Deutsch, Français.**
