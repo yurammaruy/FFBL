@@ -1,0 +1,29 @@
+<Project Sdk="Dalamud.NET.Sdk/15.0.0">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <AssemblyName>FFBL</AssemblyName>
+    <RootNamespace>FFBL</RootNamespace>
+    <Version>0.9.3.0</Version>
+    <Authors>Lusmar</Authors>
+    <Description>Controle a musica da sala de voz do Discord de dentro do jogo.</Description>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <Target Name="CopiarImagensFFBL" AfterTargets="Build">
+    <ItemGroup>
+      <ImagensFFBL Include="images\*.png" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ImagensFFBL)" DestinationFolder="$(OutDir)images" />
+    <ItemGroup>
+      <ModTelaoFFBL Include="telao_mod\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ModTelaoFFBL)" DestinationFolder="$(OutDir)telao_mod" />
+    <ItemGroup>
+      <FerramentasFFBL Include="tools\*.exe" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FerramentasFFBL)" DestinationFolder="$(OutDir)tools" />
+  </Target>
+</Project>

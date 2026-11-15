@@ -1,0 +1,16 @@
+# nunca publicar segredos
+token.txt
+config.json
+*.log
+voz.log
+**/pluginConfigs/
+# arquivos de compilacao
+bin/
+obj/
+*.pdb
+venv/
+ferramentas/
+__pycache__/
+*.zip
+.vs/
+CAMINHO_DA_DLL.txt

@@ -1,0 +1,18 @@
+{
+  "Author": "Lusmar",
+  "Name": "FFBL",
+  "InternalName": "FFBL",
+  "Punchline": "Musica no Discord, controlada de dentro do jogo. Para RP com jogadores vanilla e com mods.",
+  "Description": "FFBL: uma playlist compartilhada que toca na sala de voz do Discord e e controlada de dentro do jogo (iPod, chat da sala, telao com a capa da musica). Inclui o OMNE (voz por proximidade, em teste). Comando: /ffbl",
+  "Tags": [
+    "musica",
+    "discord",
+    "RP",
+    "chat",
+    "voz",
+    "proximidade"
+  ],
+  "ApplicableVersion": "any",
+  "RepoUrl": "https://github.com/yurammaruy/FFBL",
+  "IconUrl": "https://raw.githubusercontent.com/yurammaruy/FFBL/main/images/icon.png"
+}

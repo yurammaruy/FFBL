@@ -1,0 +1,99 @@
+name: Publicar versao do plugin
+
+# Roda quando voce publica uma "Release" no GitHub (Releases > Draft a new release > Publish).
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  plugin:
+    runs-on: windows-latest
+    steps:
+      - name: Baixar o codigo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Instalar o .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Baixar o Dalamud (necessario para compilar)
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/latest.zip -OutFile latest-dalamud.zip
+          Expand-Archive -Force latest-dalamud.zip "$env:AppData\XIVLauncher\addon\Hooks\dev\"
+
+      - name: Compilar
+        shell: pwsh
+        run: dotnet build plugin/FFBL.csproj -c Release
+
+      - name: Montar o pacote do plugin
+        shell: pwsh
+        run: |
+          $out = "plugin/bin/Release"
+          New-Item -ItemType Directory -Force stage | Out-Null
+          Copy-Item "$out/FFBL.dll" stage
+          Copy-Item "$out/FFBL.json" stage
+          Copy-Item "$out/images" stage -Recurse
+          Copy-Item "$out/telao_mod" stage -Recurse
+          # se o empacotador do Dalamud gerou um manifesto completo, usa o dele
+          $pk = Get-ChildItem -Path plugin/bin -Recurse -Filter latest.zip -ErrorAction SilentlyContinue | Select-Object -First 1
+          if ($pk) {
+            Expand-Archive -Force $pk.FullName pk
+            if (Test-Path pk/FFBL.json) { Copy-Item pk/FFBL.json stage -Force }
+          }
+          Compress-Archive -Path "stage/*" -DestinationPath latest.zip -Force
+          Get-ChildItem stage
+
+      - name: Gerar o repo.json
+        shell: pwsh
+        run: |
+          $m = Get-Content stage/FFBL.json -Raw | ConvertFrom-Json
+          if (-not $m.DalamudApiLevel) { throw "O manifesto nao tem DalamudApiLevel. Veja o passo 'Montar o pacote'." }
+          $tag = "${{ github.event.release.tag_name }}"
+          if (-not $tag) { $tag = "v" + $m.AssemblyVersion }
+          $versao = $tag.TrimStart('v')
+          while (($versao.Split('.')).Count -lt 4) { $versao += ".0" }
+          $base = "https://github.com/yurammaruy/FFBL/releases/latest/download/latest.zip"
+          $item = [ordered]@{
+            Author = $m.Author
+            Name = $m.Name
+            InternalName = $m.InternalName
+            AssemblyVersion = $versao
+            Description = $m.Description
+            Punchline = $m.Punchline
+            ApplicableVersion = "any"
+            RepoUrl = "https://github.com/yurammaruy/FFBL"
+            Tags = $m.Tags
+            DalamudApiLevel = $m.DalamudApiLevel
+            IconUrl = "https://raw.githubusercontent.com/yurammaruy/FFBL/main/images/icon.png"
+            IsHide = $false
+            IsTestingExclusive = $false
+            DownloadLinkInstall = $base
+            DownloadLinkTesting = $base
+            DownloadLinkUpdate = $base
+            LastUpdate = [int][double]::Parse((Get-Date -UFormat %s))
+          }
+          ConvertTo-Json -InputObject @($item) -Depth 5 | Set-Content repo.json -Encoding utf8
+
+      - name: Anexar o pacote na release
+        if: github.event_name == 'release'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" latest.zip --clobber
+
+      - name: Atualizar o repo.json no repositorio
+        shell: pwsh
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add repo.json
+          git commit -m "Atualiza repo.json" ; if ($LASTEXITCODE -ne 0) { Write-Host "Nada para commitar" ; exit 0 }
+          git push origin HEAD:main
