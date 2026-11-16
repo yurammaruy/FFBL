@@ -50,19 +50,21 @@ Changez la langue du plugin dans l'onglet **Idioma**.
 
 ## Écran (optionnel)
 1. Installez **Penumbra** et laissez-le activé.
+   Ensuite, **importez une fois** le fichier [`penumbra/Background_Screen.pmp`](../penumbra/Background_Screen.pmp) : ouvrez Penumbra et glissez le fichier dans sa fenêtre (ou utilisez son bouton d'import). Une seule fois suffit ; ne changez rien d'autre.
 2. Dans l'onglet **Projeção**, cliquez sur le bouton de création de l'écran. FFBL invoque votre *Plush Cushion* et le transforme en écran.
 3. Choisissez : image par défaut, pochette ou image de votre PC.
 4. Réglez taille, position et rotation avec **−** et **+**.
 
 Ceux qui n'ont pas FFBL voient toujours la mascotte normale.
 
-## OMNE (voix de proximité) : en test
-Dans l'onglet **OMNE**, **désactivé par défaut**. Explication sur la [page principale](../README.fr.md). Activez-le uniquement si le groupe teste ensemble.
+## OMNE (voix de proximité)
+Dans l'onglet **OMNE**, **désactivé par défaut**. Explication sur la [page principale](../README.fr.md). Activez-le quand le groupe veut utiliser la voix de proximité.
 
 ## Problèmes courants
 
 | Symptôme | Que faire |
 |---|---|
+| `invalid_request` / « Missing redirect_uri » à la connexion | Dans le portail Discord, dans l'app utilisée : **OAuth2 → Redirects**, ajoutez `http://localhost` et cliquez sur **Save Changes**. Vérifiez aussi que le Client ID est celui de la bonne app. |
 | Bloqué sur « Recherche de Discord » | Ouvrez l'application Discord (pas seulement le navigateur) et réessayez. |
 | Pas de demande d'autorisation | Vérifiez que vous avez accepté l'invitation de testeur. |
 | Lien webhook invalide | Collez le lien complet, qui commence par `https://discord.com/api/webhooks/`. |

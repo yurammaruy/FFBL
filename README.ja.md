@@ -11,7 +11,6 @@
 <img src="images/banner.png" width="640" alt="FFBL screen" />
 
 ![Dalamud](https://img.shields.io/badge/Dalamud-plugin-5865F2?style=for-the-badge)
-![Status](https://img.shields.io/badge/状態-テスト中-orange?style=for-the-badge)
 ![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
 
 </div>
@@ -37,11 +36,11 @@
 - 🎶 **共有キュー**：曲名またはYouTubeリンクでリクエスト。
 - 📺 **背景スクリーン**：標準画像、再生中のジャケット、または自分の画像。サイズ・位置・回転を調整可能。
 - 🌍 **Português、English、日本語、Deutsch、Français。**
-- 🔌 **OMNE搭載**（近接ボイス、テスト中。下記参照）。
+- 🔌 **OMNE搭載**（近接ボイス。下記参照）。
 
 ## 🗣️ OMNEとは？
 
-**OMNE**は、**Discordのボイスルームで近接ボイス**を実現するFFBLの機能です。キャラクター同士が近いほどその人の声が**大きく**聞こえ、離れると声が少しずつ小さくなります。
+**OMNE**（*Olá, Meu Nome É*）は、**Discordのボイスルームで近接ボイス**を実現するFFBLの機能です。キャラクター同士が近いほどその人の声が**大きく**聞こえ、離れると声が少しずつ小さくなります。
 
 1. 全員が同じDiscordボイスルームに入ります。
 2. どのキャラクターが誰なのかをプラグインに設定します（**自分**／**ターゲット**ボタンが便利）。
@@ -50,7 +49,7 @@
 
 **安全ですか？** OMNEは音声を**録音・取得・送信しません**。自分のPCのDiscordアプリと通信して音量を変えるだけです。OMNE用のサーバーはありません。
 
-> ⚠️ **OMNEはまだ開発中で、不具合が出る可能性があります。標準では無効**になっています（**OMNE**タブの「OMNEを有効にする」）。
+> ℹ️ OMNEは標準では**オフ**です（**OMNE**タブの「OMNEを有効にする」）。
 > Discordの音量制御は制限付きの機能で、*アプリのテスター*として追加された人だけが使えます（1アプリにつき最大50人）。
 
 ## 🚀 使ってみたい！（プレイヤー）
@@ -71,7 +70,6 @@ https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 
 ## ⚠️ ご注意
 
-- FFBLは**テスト中**で、不具合がある可能性があります。
 - Dalamudプラグインは**スクウェア・エニックスの公式サポート対象外**です。自己責任でご利用ください。
 - **Webhookリンクはパスワードと同じ**です。仲間以外には共有しないでください。
 - スクリーンには**Penumbra**プラグインとミニオン**Plush Cushion**が必要です。
@@ -80,5 +78,7 @@ https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 ## 🤝 貢献とライセンス
 
 **オープンソース**（[MIT](LICENSE)）。提案・修正・翻訳は**Issues**や**Pull Requests**で歓迎します。
+
+スクリーンには**Anya Hichu**さんのMod **Background Screen** を使用しています（クレジット付きで `penumbra/` に同梱）。
 
 **Lusmar**が、エオルゼアのRPコミュニティへの愛を込めて制作。💙

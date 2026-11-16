@@ -375,6 +375,22 @@ internal sealed class MainWindow : Window, IDisposable
         var telao = plugin.TelaoEfetivo(painel?.Telao);
 
         ImGui.Text(Loc.T("Telao"));
+
+        var aceitar = plugin.Config.ProjAceitarTelaoDeOutros;
+        if (ImGui.Checkbox(Loc.T("Ver o telao criado por outras pessoas") + "##aceitartelao", ref aceitar))
+        {
+            plugin.Config.ProjAceitarTelaoDeOutros = aceitar;
+            plugin.SalvarConfig();
+        }
+        ImGui.TextColored(cinza, Loc.T("O telao aparece no minion de quem o criou. O FFBL nao invoca nada no seu jogo."));
+
+        if (telao != null && !plugin.TelaoPermitido(telao))
+        {
+            ImGui.Spacing();
+            ImGui.TextColored(cinza, Loc.T("Ha um telao ativo na sala, mas ele nao aparece no seu jogo porque voce desligou a opcao."));
+            return;
+        }
+
         if (telao == null)
         {
             if (!plugin.Conectado) ImGui.TextColored(cinza, Loc.T("Conecte primeiro para criar um telao."));

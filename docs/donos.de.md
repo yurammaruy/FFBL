@@ -36,7 +36,12 @@ Nur bei Nähe-Sprachchat: im Portal **App Testers** öffnen und jeden Freund ein
 
 Der Bot ist ein Programm, das **auf deinem Computer läuft**. **Ist es geschlossen, gibt es keine Musik.** Lass es offen, solange die Gruppe es nutzt.
 
-1. **Python 3.11 oder neuer** installieren (<https://www.python.org/downloads/>). Bei der Installation **Add Python to PATH** anhaken.
+1. Installiere **Python 3.11 oder neuer**. Startmenü öffnen, `PowerShell` eingeben, öffnen und den folgenden Befehl einfügen. Danach **PowerShell schließen und neu öffnen** und mit `python --version` prüfen.
+
+   ```
+   winget install -e --id Python.Python.3.12
+   ```
+   Fehlt `winget` unter deinem Windows, installiere Python über den Microsoft Store (nach „Python 3.12“ suchen).
 2. Den Ordner **`bot`** aus diesem Repository herunterladen (grüner Button **Code → Download ZIP**, dann entpacken).
 3. **`INSTALAR.bat`** doppelklicken (nur beim ersten Mal; lädt, was der Bot braucht).
 4. **`INICIAR.bat`** doppelklicken.
@@ -60,6 +65,7 @@ Dann verweise auf die [Spieleranleitung](usuarios.de.md).
 
 | Symptom | Lösung |
 |---|---|
+| `invalid_request` / „Missing redirect_uri“ beim Verbinden | Im Discord-Portal, in der verwendeten App: **OAuth2 → Redirects**, `http://localhost` hinzufügen und **Save Changes** klicken. Prüfe auch, ob die Client ID zur richtigen App gehört. |
 | Bot schließt sofort | `INSTALAR.bat` erneut ausführen und Screenshot des Fehlers schicken. |
 | „Ungültiger Token“ | Neuen Token erzeugen (**Bot → Reset Token**) und `token.txt` löschen. |
 | Bot ignoriert Befehle | **Message Content Intent** und Kanal-ID prüfen. |

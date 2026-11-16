@@ -57,20 +57,22 @@ Na aba **Idioma** você troca o idioma do plugin.
 ## Telão (opcional)
 
 1. Instale o **Penumbra** e deixe-o ligado.
+   Depois, **importe uma vez** o arquivo [`penumbra/Background_Screen.pmp`](../penumbra/Background_Screen.pmp): abra o Penumbra e arraste o arquivo para a janela dele (ou use o botão de importar mods). Só precisa fazer isso uma vez; depois não mexa em mais nada.
 2. Na aba **Projeção**, clique em **Criar telão aqui**. O FFBL invoca o seu *Plush Cushion* e ele vira a tela.
 3. Escolha o que mostrar: imagem padrão, capa da música ou uma imagem do seu computador.
 4. Ajuste tamanho, posição e giro com os botões **−** e **+**.
 
 Quem não tem o FFBL continua vendo o minion normal.
 
-## OMNE (voz por proximidade): em teste
+## OMNE (voz por proximidade)
 
-Está na aba **OMNE**, **desligado por padrão**. Leia a explicação no [início da página](../README.md). Ligue só se o grupo for testar junto.
+Está na aba **OMNE**, **desligado por padrão**. Leia a explicação no [início da página](../README.md). Ligue quando o grupo quiser usar voz por proximidade.
 
 ## Problemas comuns
 
 | Sintoma | O que fazer |
 |---|---|
+| `invalid_request` / "Missing redirect_uri" ao conectar | No portal do Discord, no app usado: **OAuth2 → Redirects**, adicione `http://localhost` e clique em **Save Changes**. Confira também se o Client ID é do app certo. |
 | "Procurando o Discord..." não sai disso | Abra o aplicativo do Discord (não só o navegador) e tente de novo. |
 | Não aparece o botão de autorizar | Confira se você aceitou o convite de testador. |
 | "O link do webhook está vazio ou inválido" | Cole o link inteiro, que começa com `https://discord.com/api/webhooks/`. |

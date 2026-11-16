@@ -116,6 +116,23 @@ internal sealed class TelaoMinion
     }
 #pragma warning restore CS0618
 
+#pragma warning disable CS0618
+    /// <summary>Acha o minion de OUTRA pessoa (o telao dela), so olhando a tabela de objetos; nao mexe em nada.</summary>
+    private bool AcharMinionDe(string dono, out nint endereco, out int indice)
+    {
+        endereco = 0; indice = -1;
+        if (string.IsNullOrEmpty(dono)) return false;
+        uint donoId = 0;
+        foreach (var o in Plugin.ObjectTable)
+            if (o.ObjectKind == ObjectKind.Pc && string.Equals(o.Name.TextValue, dono, StringComparison.OrdinalIgnoreCase)) { donoId = o.EntityId; break; }
+        if (donoId == 0) return false;
+        foreach (var o in Plugin.ObjectTable)
+            if (o.ObjectKind == ObjectKind.Companion && o.ObjectIndex > 0 && o.OwnerId == donoId) { endereco = o.Address; indice = o.ObjectIndex; return true; }
+        return false;
+    }
+
+#pragma warning restore CS0618
+
     private unsafe void Invocar()
     {
         var id = AcharIdCompanion();
@@ -140,7 +157,7 @@ internal sealed class TelaoMinion
         }
     }
 
-    private bool estavaLocal, jaTinha, invocarPendente, dispensarPendente, petDeNos;
+    private bool estavaLocal, jaTinha, invocarPendente, dispensarPendente, petDeNos, modoDono;
     private DateTime naoAchouDesde = DateTime.MinValue;
 
     private void Passo(TelaoInfo? telao, PanelInfo? painel)
@@ -153,7 +170,7 @@ internal sealed class TelaoMinion
             var eraAtivo = Ativo;
             if (Ativo) { Desativar(); naoMexerAte = agora.AddSeconds(1.2); }
             // o telao foi recolhido: o minion que servia de tela tambem sai
-            if (jaTinha && telao == null && (eraAtivo || petDeNos)) { dispensarPendente = true; pen.Nota("telao recolhido: dispensando o minion"); }
+            if (jaTinha && telao == null && modoDono && (eraAtivo || petDeNos)) { dispensarPendente = true; pen.Nota("telao recolhido: dispensando o minion"); }
             jaTinha = telao != null;
             estavaLocal = false;
             invocarPendente = false;
@@ -169,7 +186,10 @@ internal sealed class TelaoMinion
             return;
         }
 
-        if (!estavaLocal) { invocarPendente = true; tentativasInvocar = 0; pen.Nota("telao ativo: vou chamar o minion"); } // telao novo ou voltou ao mapa
+        // dono = quem criou o telao: o minion dele vira a tela. Os outros so VEEM o minion do dono; nada e invocado no jogo deles.
+        var souDono = plugin.SouDono(telao);
+        modoDono = souDono;
+        if (!estavaLocal && souDono) { invocarPendente = true; tentativasInvocar = 0; pen.Nota("telao ativo: vou chamar o minion"); } // telao novo ou voltou ao mapa
         estavaLocal = true;
         jaTinha = true;
         dispensarPendente = false;
@@ -180,8 +200,17 @@ internal sealed class TelaoMinion
         if (Plugin.ObjectTable.LocalPlayer == null) return;
 
         // acha o meu minion (o proprio personagem aponta para ele)
-        var achou = AcharMinion(out var enderecoMinion, out var indice);
+        nint enderecoMinion; int indice;
+        var achou = souDono ? AcharMinion(out enderecoMinion, out indice) : AcharMinionDe(telao.Dono, out enderecoMinion, out indice);
         var alvo = Alvo;
+        if (!achou && !souDono)
+        {
+            // espectador: o minion de quem criou o telao nao esta por perto agora; nao invoca nada
+            if (Ativo) { Desativar(); naoMexerAte = agora.AddSeconds(1.2); }
+            visivelDesde = DateTime.MinValue;
+            Estado = "Aguardando o minion de " + telao.Dono + " ficar visivel perto de voce.";
+            return;
+        }
         if (!achou)
         {
             visivelDesde = DateTime.MinValue;

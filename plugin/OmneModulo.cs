@@ -121,7 +121,6 @@ internal sealed class OmneModulo : IDisposable
             plugin.Config.OmneAtivo = ativo;
             plugin.SalvarConfig();
         }
-        ImGui.TextColored(Aviso, Loc.T("O OMNE ainda esta em desenvolvimento e pode apresentar falhas, por padrao fica desabilitado."));
 
         if (!plugin.Config.OmneAtivo)
         {

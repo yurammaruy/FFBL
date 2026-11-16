@@ -50,19 +50,21 @@ Change the plugin language in the **Idioma** tab.
 
 ## Screen (optional)
 1. Install **Penumbra** and keep it enabled.
+   Then **import once** the file [`penumbra/Background_Screen.pmp`](../penumbra/Background_Screen.pmp): open Penumbra and drag the file into its window (or use its import-mods button). You only need to do this once; don't change anything else.
 2. In the **Projeção** tab click the create-screen button. FFBL summons your *Plush Cushion* and turns it into the screen.
 3. Pick what to show: default image, song cover or an image from your PC.
 4. Adjust size, position and rotation with **−** and **+**.
 
 People without FFBL still see the normal minion.
 
-## OMNE (proximity voice): testing
-In the **OMNE** tab, **off by default**. Read the explanation on the [main page](../README.en.md). Enable it only if your group is testing together.
+## OMNE (proximity voice)
+In the **OMNE** tab, **off by default**. Read the explanation on the [main page](../README.en.md). Enable it when your group wants proximity voice.
 
 ## Common problems
 
 | Symptom | What to do |
 |---|---|
+| `invalid_request` / "Missing redirect_uri" when connecting | In the Discord portal, in the app being used: **OAuth2 → Redirects**, add `http://localhost` and click **Save Changes**. Also check the Client ID belongs to the right app. |
 | Stuck on "looking for Discord" | Open the Discord app (not only the browser) and try again. |
 | No authorize prompt | Make sure you accepted the tester invite. |
 | Webhook link invalid | Paste the whole link, starting with `https://discord.com/api/webhooks/`. |

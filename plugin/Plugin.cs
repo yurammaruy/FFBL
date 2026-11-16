@@ -95,7 +95,10 @@ public sealed class Plugin : IDalamudPlugin
         Capas.Limpar();
         windowSystem.Draw();
         Dialogos.Draw();
-        Minion.Tick(TelaoEfetivo(Chat.Panel?.Telao), Chat.Panel);
+        var telaoParaMim = TelaoEfetivo(Chat.Panel?.Telao);
+        // telao de outra pessoa so e exibido se voce nao desligou a opcao (e nunca invoca nada no seu jogo)
+        if (telaoParaMim != null && !TelaoPermitido(telaoParaMim)) telaoParaMim = null;
+        Minion.Tick(telaoParaMim, Chat.Panel);
         Omne.Tick();
     }
 
@@ -114,8 +117,15 @@ public sealed class Plugin : IDalamudPlugin
     // ------------------------------------------------------------ telao
 
     /// <summary>Cria o telao a poucos passos a frente do personagem, virado para ele.</summary>
+    /// <summary>True se fui eu que criei/movi o telao nesta sessao (so entao ele aparece sem pedir permissao).</summary>
+    internal bool MeuTelao { get; private set; }
+    internal bool SouDono(TelaoInfo t)
+        => MeuTelao || string.Equals(t.Dono, NomePersonagem() ?? "", StringComparison.OrdinalIgnoreCase);
+    internal bool TelaoPermitido(TelaoInfo t) => SouDono(t) || Config.ProjAceitarTelaoDeOutros;
+
     internal void CriarTelaoAqui(float largura, float altura)
     {
+        MeuTelao = true;
         var jogador = ObjectTable.LocalPlayer;
         if (jogador == null) { Chat.SetStatus("Personagem ainda nao carregou.", 3); return; }
         var r = jogador.Rotation;
@@ -130,6 +140,7 @@ public sealed class Plugin : IDalamudPlugin
 
     internal void MoverTelaoParaMim(TelaoInfo atual)
     {
+        MeuTelao = true;
         var jogador = ObjectTable.LocalPlayer;
         if (jogador == null) return;
         var r = jogador.Rotation;
@@ -169,6 +180,7 @@ public sealed class Plugin : IDalamudPlugin
 
     internal void RecolherTelao()
     {
+        MeuTelao = false;
         Previa = null;
         suprimirAte = DateTime.Now.AddSeconds(5);
         Enviar("!telao recolher", ignorarLimite: true);

@@ -34,6 +34,7 @@ public sealed class Configuration : IPluginConfiguration
     public OmneConfig Omne { get; set; } = new();
 
     public bool ProjUsarMinion { get; set; } = false;
+    public bool ProjAceitarTelaoDeOutros { get; set; } = true;  // ver o telao de OUTRA pessoa (so visual: nao invoca nada no seu jogo)
     public uint ProjMinionId { get; set; } = 0;           // 0 = Plush Cushion
     public float ProjBaseLargura { get; set; } = 3f;      // tamanho natural da parede (calibragem)
     public float ProjBaseAltura { get; set; } = 3f;

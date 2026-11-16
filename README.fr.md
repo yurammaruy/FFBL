@@ -11,7 +11,6 @@
 <img src="images/banner.png" width="640" alt="FFBL screen" />
 
 ![Dalamud](https://img.shields.io/badge/Dalamud-plugin-5865F2?style=for-the-badge)
-![Status](https://img.shields.io/badge/statut-en%20test-orange?style=for-the-badge)
 ![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
 
 </div>
@@ -37,11 +36,11 @@
 - 🎶 **File partagée** : par nom ou lien YouTube.
 - 📺 **Écran dans le décor** : image par défaut, pochette en cours ou votre image ; taille, position et rotation réglables.
 - 🌍 **Português, English, 日本語, Deutsch, Français.**
-- 🔌 **OMNE inclus** (voix de proximité, en test, voir ci-dessous).
+- 🔌 **OMNE inclus** (voix de proximité, voir ci-dessous).
 
 ## 🗣️ Qu'est-ce que OMNE ?
 
-**OMNE** est la partie de FFBL qui crée une **voix de proximité grâce à un salon vocal Discord** : plus un personnage est proche du vôtre, **plus vous l'entendez fort** ; en s'éloignant, la voix s'estompe.
+**OMNE** (*Olá, Meu Nome É*) est la partie de FFBL qui crée une **voix de proximité grâce à un salon vocal Discord** : plus un personnage est proche du vôtre, **plus vous l'entendez fort** ; en s'éloignant, la voix s'estompe.
 
 1. Tout le monde rejoint le même salon vocal Discord.
 2. Vous indiquez au plugin quel personnage correspond à quelle personne (boutons **Moi** et **Cible**).
@@ -50,7 +49,7 @@
 
 **Est-ce sûr ?** OMNE **n'enregistre, ne capture et n'envoie aucun audio**. Il dialogue uniquement avec l'application Discord de votre PC pour changer les volumes. Il n'existe aucun serveur OMNE.
 
-> ⚠️ **OMNE est encore en développement et peut présenter des défauts. Il est désactivé par défaut** (onglet **OMNE**, case « Activer OMNE »).
+> ℹ️ OMNE est **désactivé** par défaut (onglet **OMNE**, case « Activer OMNE »).
 > Le contrôle du volume de Discord est restreint : il ne fonctionne que pour les personnes ajoutées comme *testeurs de l'app* (50 maximum par app).
 
 ## 🚀 Je veux l'utiliser ! (joueurs)
@@ -71,7 +70,6 @@ L'organisateur vous donnera un **Client ID**, un **Client Secret** et un **lien 
 
 ## ⚠️ Remarques importantes
 
-- FFBL est **en phase de test** et peut contenir des défauts.
 - Les plugins Dalamud **ne sont pas soutenus par Square Enix**. Utilisation à vos risques.
 - Le **lien webhook est comme un mot de passe** : ne le partagez qu'avec votre groupe.
 - L'écran nécessite le plugin **Penumbra** et la mascotte **Plush Cushion**.
@@ -80,5 +78,7 @@ L'organisateur vous donnera un **Client ID**, un **Client Secret** et un **lien 
 ## 🤝 Contribuer & licence
 
 Projet **open source** ([MIT](LICENSE)). Suggestions, corrections et traductions bienvenues via **Issues** et **Pull Requests**.
+
+L'écran utilise le mod **Background Screen** de **Anya Hichu** (inclus dans `penumbra/` avec mention de l'auteure).
 
 Réalisé par **Lusmar**, avec amour pour la communauté RP d'Éorzéa. 💙

@@ -50,19 +50,21 @@ https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 
 ## スクリーン（任意）
 1. **Penumbra**をインストールして有効にしておく。
+   次に、ファイル [`penumbra/Background_Screen.pmp`](../penumbra/Background_Screen.pmp) を**一度だけインポート**します。Penumbraを開き、ウィンドウにファイルをドラッグ＆ドロップ（またはインポートボタン）。一度だけで大丈夫です。ほかは何も変更しないでください。
 2. **Projeção**タブでスクリーン作成ボタンをクリック。FFBLが*Plush Cushion*を呼び出してスクリーンに変えます。
 3. 表示内容を選択：標準画像、曲のジャケット、またはPC内の画像。
 4. **−**と**+**でサイズ・位置・回転を調整。
 
 FFBLを入れていない人には、通常のミニオンのまま見えます。
 
-## OMNE（近接ボイス）：テスト中
-**OMNE**タブにあり、**標準では無効**です。説明は[トップページ](../README.ja.md)をご覧ください。仲間と一緒にテストするときだけ有効にしてください。
+## OMNE（近接ボイス）
+**OMNE**タブにあり、**標準では無効**です。説明は[トップページ](../README.ja.md)をご覧ください。仲間と近接ボイスを使いたいときに有効にしてください。
 
 ## よくある問題
 
 | 症状 | 対処 |
 |---|---|
+| 接続時に `invalid_request` / 「Missing redirect_uri」 | Discordポータルで使用中のアプリの **OAuth2 → Redirects** に `http://localhost` を追加し、**Save Changes** をクリック。Client IDが正しいアプリのものかも確認してください。 |
 | 「Discordを探しています」から進まない | Discordアプリ（ブラウザ版ではなく）を開いて再試行。 |
 | 認証の画面が出ない | テスター招待を承認したか確認。 |
 | Webhookリンクが無効 | `https://discord.com/api/webhooks/` で始まるリンク全体を貼り付ける。 |

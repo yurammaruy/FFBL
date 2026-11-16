@@ -36,7 +36,12 @@ Only if you use proximity voice: in the portal go to **App Testers** and invite 
 
 The bot is a program that **runs on your computer**. **If it is closed, no music plays.** Keep it open while the group is using it.
 
-1. Install **Python 3.11 or newer** (<https://www.python.org/downloads/>). During setup tick **Add Python to PATH**.
+1. Install **Python 3.11 or newer**. Open the Start menu, type `PowerShell`, open it and paste the command below. Then **close and reopen PowerShell** and check with `python --version`.
+
+   ```
+   winget install -e --id Python.Python.3.12
+   ```
+   If `winget` is missing on your Windows, install Python from the Microsoft Store (search "Python 3.12").
 2. Download the **`bot`** folder from this repository (green **Code → Download ZIP** button, then extract).
 3. Double-click **`INSTALAR.bat`** (first time only; it downloads what the bot needs).
 4. Double-click **`INICIAR.bat`**.
@@ -60,6 +65,7 @@ Then point them to the [Player guide](usuarios.en.md).
 
 | Symptom | What to do |
 |---|---|
+| `invalid_request` / "Missing redirect_uri" when connecting | In the Discord portal, in the app being used: **OAuth2 → Redirects**, add `http://localhost` and click **Save Changes**. Also check the Client ID belongs to the right app. |
 | Bot closes right away | Run `INSTALAR.bat` again and send a screenshot of the error. |
 | "Invalid token" | Generate a new token (**Bot → Reset Token**) and delete `token.txt`. |
 | Bot ignores commands | Check **Message Content Intent** and the room ID. |

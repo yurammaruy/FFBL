@@ -36,7 +36,12 @@ Seulement pour la voix de proximité : dans le portail, **App Testers**, invitez
 
 Le bot est un programme qui **tourne sur votre ordinateur**. **Fermé, il ne joue aucune musique.** Laissez-le ouvert tant que le groupe l'utilise.
 
-1. Installez **Python 3.11 ou plus récent** (<https://www.python.org/downloads/>). À l'installation, cochez **Add Python to PATH**.
+1. Installez **Python 3.11 ou plus récent**. Ouvrez le menu Démarrer, tapez `PowerShell`, ouvrez-le et collez la commande ci-dessous. Puis **fermez et rouvrez PowerShell** et vérifiez avec `python --version`.
+
+   ```
+   winget install -e --id Python.Python.3.12
+   ```
+   Si `winget` est absent de votre Windows, installez Python depuis le Microsoft Store (cherchez « Python 3.12 »).
 2. Téléchargez le dossier **`bot`** de ce dépôt (bouton vert **Code → Download ZIP**, puis extrayez).
 3. Double-cliquez sur **`INSTALAR.bat`** (première fois uniquement ; il télécharge ce dont le bot a besoin).
 4. Double-cliquez sur **`INICIAR.bat`**.
@@ -60,6 +65,7 @@ Puis renvoyez-les vers le [Guide du joueur](usuarios.fr.md).
 
 | Symptôme | Que faire |
 |---|---|
+| `invalid_request` / « Missing redirect_uri » à la connexion | Dans le portail Discord, dans l'app utilisée : **OAuth2 → Redirects**, ajoutez `http://localhost` et cliquez sur **Save Changes**. Vérifiez aussi que le Client ID est celui de la bonne app. |
 | Le bot se ferme aussitôt | Relancez `INSTALAR.bat` et envoyez une capture de l'erreur. |
 | « Token invalide » | Générez un nouveau token (**Bot → Reset Token**) et supprimez `token.txt`. |
 | Le bot ignore les commandes | Vérifiez **Message Content Intent** et l'identifiant du salon. |

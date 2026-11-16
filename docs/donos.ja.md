@@ -36,7 +36,12 @@
 
 ボットは**あなたのPCで動くプログラム**です。**閉じていると音楽は流れません。**仲間が使っている間は開いたままにしてください。
 
-1. **Python 3.11以降**をインストール（<https://www.python.org/downloads/>）。インストール時に**Add Python to PATH**にチェック。
+1. **Python 3.11以降**をインストールします。スタートメニューで `PowerShell` と入力して開き、次のコマンドを貼り付けます。その後**PowerShellを一度閉じて開き直し**、`python --version` で確認します。
+
+   ```
+   winget install -e --id Python.Python.3.12
+   ```
+   `winget` が使えない場合は、Microsoft Storeで「Python 3.12」を検索してインストールしてください。
 2. このリポジトリの**`bot`**フォルダをダウンロード（緑の**Code → Download ZIP**ボタン、その後展開）。
 3. **`INSTALAR.bat`**をダブルクリック（初回のみ。必要なものをダウンロードします）。
 4. **`INICIAR.bat`**をダブルクリック。
@@ -60,6 +65,7 @@
 
 | 症状 | 対処 |
 |---|---|
+| 接続時に `invalid_request` / 「Missing redirect_uri」 | Discordポータルで使用中のアプリの **OAuth2 → Redirects** に `http://localhost` を追加し、**Save Changes** をクリック。Client IDが正しいアプリのものかも確認してください。 |
 | ボットがすぐ閉じる | `INSTALAR.bat`を再実行し、エラーのスクリーンショットを送る。 |
 | 「無効なトークン」 | 新しいトークンを発行（**Bot → Reset Token**）し、`token.txt`を削除。 |
 | ボットがコマンドに反応しない | **Message Content Intent**とルームIDを確認。 |

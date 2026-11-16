@@ -11,7 +11,6 @@
 <img src="images/banner.png" width="640" alt="FFBL screen" />
 
 ![Dalamud](https://img.shields.io/badge/Dalamud-plugin-5865F2?style=for-the-badge)
-![Status](https://img.shields.io/badge/status-testing-orange?style=for-the-badge)
 ![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
 
 </div>
@@ -37,11 +36,11 @@
 - 🎶 **Shared queue**: request by name or YouTube link.
 - 📺 **Screen in the scenery**: default image, current cover or your own image; adjustable size, position and rotation.
 - 🌍 **Português, English, 日本語, Deutsch, Français.**
-- 🔌 **OMNE included** (proximity voice, in testing, see below).
+- 🔌 **OMNE included** (proximity voice, see below).
 
 ## 🗣️ What is OMNE?
 
-**OMNE** is the part of FFBL that creates **proximity voice using a Discord voice room**: the closer a character is to yours, the **louder you hear that person**; as they walk away, the voice fades.
+**OMNE** (*Olá, Meu Nome É*) is the part of FFBL that creates **proximity voice using a Discord voice room**: the closer a character is to yours, the **louder you hear that person**; as they walk away, the voice fades.
 
 1. Everyone joins the same Discord voice room.
 2. You tell the plugin which character is which person (**Me** and **Target** buttons help).
@@ -50,7 +49,7 @@
 
 **Is it safe?** OMNE **does not record, capture or send audio**. It only talks to the Discord app on your own PC and changes each person's volume. There is no OMNE server.
 
-> ⚠️ **OMNE is still in development and may have bugs. It is disabled by default** (plugin **OMNE** tab, "Enable OMNE" checkbox).
+> ℹ️ OMNE is **off by default** (plugin **OMNE** tab, "Enable OMNE" checkbox).
 > Discord's volume control is a restricted feature: it only works for people added as *app testers* (limit of 50 per app).
 
 ## 🚀 I want to use it! (players)
@@ -71,7 +70,6 @@ The group organizer will give you a **Client ID**, a **Client Secret** and a **w
 
 ## ⚠️ Important notes
 
-- FFBL is **in testing** and may have bugs.
 - Dalamud plugins are **not supported by Square Enix**. Use at your own risk.
 - The **webhook link is like a password**: share it only with your group.
 - The screen needs the **Penumbra** plugin and the **Plush Cushion** minion.
@@ -80,5 +78,7 @@ The group organizer will give you a **Client ID**, a **Client Secret** and a **w
 ## 🤝 Contributing & license
 
 **Open source** ([MIT](LICENSE)). Suggestions, fixes and translations are welcome via **Issues** and **Pull Requests**.
+
+The screen uses the **Background Screen** mod by **Anya Hichu** (included in `penumbra/` with credit).
 
 Made by **Lusmar**, with love for the Eorzea RP community. 💙

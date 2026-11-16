@@ -36,7 +36,12 @@ Só se for usar a voz por proximidade: no portal, **App Testers**, convide cada 
 
 O bot é um programa que **roda no seu computador**. **Se ele estiver fechado, não toca música.** Deixe-o aberto enquanto o grupo estiver usando.
 
-1. Instale o **Python 3.11 ou mais novo** (<https://www.python.org/downloads/>). Na instalação, marque **Add Python to PATH**.
+1. Instale o **Python 3.11 ou mais novo**. Abra o menu Iniciar, digite `PowerShell`, abra e cole o comando abaixo. Depois **feche e abra o PowerShell de novo** e confira com `python --version`.
+
+   ```
+   winget install -e --id Python.Python.3.12
+   ```
+   Se o `winget` não existir no seu Windows, instale o Python pela Microsoft Store (procure por "Python 3.12").
 2. Baixe a pasta **`bot`** deste repositório (botão verde **Code → Download ZIP** e extraia).
 3. Dê dois cliques em **`INSTALAR.bat`** (só na primeira vez; ele baixa o que o bot precisa).
 4. Dê dois cliques em **`INICIAR.bat`**.
@@ -60,6 +65,7 @@ Depois mande eles para o [Guia do jogador](usuarios.md).
 
 | Sintoma | O que fazer |
 |---|---|
+| `invalid_request` / "Missing redirect_uri" ao conectar | No portal do Discord, no app usado: **OAuth2 → Redirects**, adicione `http://localhost` e clique em **Save Changes**. Confira também se o Client ID é do app certo. |
 | O bot fecha logo ao abrir | Rode `INSTALAR.bat` de novo e mande um print do erro. |
 | "Token inválido" | Gere um token novo (**Bot → Reset Token**) e apague o `token.txt`. |
 | O bot não responde aos comandos | Confira o **Message Content Intent** e o ID da sala de texto. |

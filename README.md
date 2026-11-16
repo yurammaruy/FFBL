@@ -11,7 +11,6 @@
 <img src="images/banner.png" width="640" alt="Telão do FFBL no jardim de uma casa em Final Fantasy XIV" />
 
 ![Plugin](https://img.shields.io/badge/Dalamud-plugin-5865F2?style=for-the-badge)
-![Status](https://img.shields.io/badge/status-em%20testes-orange?style=for-the-badge)
 ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green?style=for-the-badge)
 
 </div>
@@ -39,11 +38,11 @@ Assim a cena de RP funciona para todo mundo: quem tem mods enxerga mais, e quem 
 - 🎶 **Fila compartilhada**: peça por nome ou link do YouTube.
 - 📺 **Telão no cenário**: imagem padrão, capa da música atual ou uma imagem sua. Dá para mudar tamanho, posição e giro.
 - 🌍 **Português, English, 日本語, Deutsch e Français.**
-- 🔌 **OMNE incluído** (voz por proximidade, em teste, veja abaixo).
+- 🔌 **OMNE incluído** (voz por proximidade, veja abaixo).
 
 ## 🗣️ O que é o OMNE?
 
-O **OMNE** é a parte do FFBL que cria **voz por proximidade usando uma sala de voz do Discord**: quanto mais perto o personagem de alguém está do seu, **mais alto você ouve essa pessoa**; ao se afastar, a voz some aos poucos.
+O **OMNE** (*Olá, Meu Nome É*) é a parte do FFBL que cria **voz por proximidade usando uma sala de voz do Discord**: quanto mais perto o personagem de alguém está do seu, **mais alto você ouve essa pessoa**; ao se afastar, a voz some aos poucos.
 
 **Como funciona, em palavras simples:**
 
@@ -54,8 +53,8 @@ O **OMNE** é a parte do FFBL que cria **voz por proximidade usando uma sala de 
 
 **É seguro?** O OMNE **não grava, não captura e não envia áudio**. Ele só conversa com o Discord instalado no seu próprio computador e muda o volume de cada pessoa. Não existe servidor do OMNE.
 
-> ⚠️ **O OMNE ainda está em desenvolvimento e pode apresentar falhas. Por padrão ele fica desabilitado** (aba **OMNE** do plugin, caixa "Ativar o OMNE").
-> Os ajustes de volume do Discord são um recurso restrito: só funcionam para quem foi adicionado como *testador do app* (limite de 50 pessoas por app).
+> ℹ️ Por padrão o OMNE vem **desligado** (aba **OMNE** do plugin, caixa "Ativar o OMNE").
+> O controle de volume do Discord é um recurso restrito: só funciona para quem foi adicionado como *testador do app* (limite de 50 pessoas por app).
 
 ## 🚀 Quero usar! (jogadores)
 
@@ -77,7 +76,6 @@ O passo a passo cobre: configurar o Discord → instalar e ligar o bot → passa
 
 ## ⚠️ Avisos importantes
 
-- O FFBL está **em fase de testes**: pode ter falhas.
 - Plugins do Dalamud **não são apoiados pela Square Enix**. Use por sua conta e risco.
 - O **link do webhook funciona como uma senha**: só compartilhe com o seu grupo.
 - O telão precisa do plugin **Penumbra** e do minion **Plush Cushion**.
@@ -86,5 +84,7 @@ O passo a passo cobre: configurar o Discord → instalar e ligar o bot → passa
 ## 🤝 Contribuir e licença
 
 Projeto **open source** (licença [MIT](LICENSE)). Sugestões, correções e traduções são bem-vindas em **Issues** e **Pull Requests**.
+
+O telão usa o mod **Background Screen**, de **Anya Hichu** (incluído em `penumbra/` com os devidos créditos).
 
 Feito por **Lusmar**, com muito carinho pela comunidade de RP de Eorzea. 💙

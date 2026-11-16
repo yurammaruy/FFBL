@@ -50,19 +50,21 @@ Die Sprache des Plugins änderst du im Reiter **Idioma**.
 
 ## Leinwand (optional)
 1. **Penumbra** installieren und aktiviert lassen.
+   Danach **einmalig importieren**: die Datei [`penumbra/Background_Screen.pmp`](../penumbra/Background_Screen.pmp). Penumbra öffnen und die Datei in sein Fenster ziehen (oder die Import-Schaltfläche nutzen). Das ist nur einmal nötig; sonst nichts ändern.
 2. Im Reiter **Projeção** die Schaltfläche zum Erstellen der Leinwand klicken. FFBL beschwört deinen *Plush Cushion* und macht ihn zur Leinwand.
 3. Wähle: Standardbild, Cover oder ein Bild vom PC.
 4. Größe, Position und Drehung mit **−** und **+** einstellen.
 
 Wer FFBL nicht hat, sieht weiter den normalen Minion.
 
-## OMNE (Näheschat): im Test
-Im Reiter **OMNE**, **standardmäßig aus**. Erklärung auf der [Startseite](../README.de.md). Nur aktivieren, wenn die Gruppe gemeinsam testet.
+## OMNE (Näheschat)
+Im Reiter **OMNE**, **standardmäßig aus**. Erklärung auf der [Startseite](../README.de.md). Aktiviere es, wenn deine Gruppe Nähe-Sprachchat nutzen möchte.
 
 ## Häufige Probleme
 
 | Symptom | Lösung |
 |---|---|
+| `invalid_request` / „Missing redirect_uri“ beim Verbinden | Im Discord-Portal, in der verwendeten App: **OAuth2 → Redirects**, `http://localhost` hinzufügen und **Save Changes** klicken. Prüfe auch, ob die Client ID zur richtigen App gehört. |
 | Hängt bei „Discord wird gesucht“ | Discord-App (nicht nur Browser) öffnen und erneut versuchen. |
 | Keine Autorisierungsabfrage | Prüfen, ob die Tester-Einladung angenommen wurde. |
 | Webhook-Link ungültig | Den ganzen Link einfügen (beginnt mit `https://discord.com/api/webhooks/`). |

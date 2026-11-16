@@ -11,7 +11,6 @@
 <img src="images/banner.png" width="640" alt="FFBL screen" />
 
 ![Dalamud](https://img.shields.io/badge/Dalamud-plugin-5865F2?style=for-the-badge)
-![Status](https://img.shields.io/badge/Status-in%20Tests-orange?style=for-the-badge)
 ![MIT](https://img.shields.io/badge/MIT-green?style=for-the-badge)
 
 </div>
@@ -37,11 +36,11 @@
 - 🎶 **Gemeinsame Warteschlange**: per Name oder YouTube-Link.
 - 📺 **Leinwand in der Szenerie**: Standardbild, aktuelles Cover oder eigenes Bild; Größe, Position und Drehung einstellbar.
 - 🌍 **Português, English, 日本語, Deutsch, Français.**
-- 🔌 **OMNE enthalten** (Näheschat, im Test, siehe unten).
+- 🔌 **OMNE enthalten** (Näheschat, siehe unten).
 
 ## 🗣️ Was ist OMNE?
 
-**OMNE** ist der Teil von FFBL, der **Nähe-Sprachchat über einen Discord-Sprachkanal** ermöglicht: Je näher ein Charakter an deinem ist, **desto lauter hörst du die Person**; entfernt er sich, wird die Stimme leiser.
+**OMNE** (*Olá, Meu Nome É*) ist der Teil von FFBL, der **Nähe-Sprachchat über einen Discord-Sprachkanal** ermöglicht: Je näher ein Charakter an deinem ist, **desto lauter hörst du die Person**; entfernt er sich, wird die Stimme leiser.
 
 1. Alle betreten denselben Discord-Sprachkanal.
 2. Du sagst dem Plugin, welcher Charakter welche Person ist (Schaltflächen **Ich** und **Ziel** helfen).
@@ -50,7 +49,7 @@
 
 **Ist das sicher?** OMNE **nimmt kein Audio auf und sendet keines**. Es spricht nur mit der Discord-App auf deinem eigenen PC und ändert die Lautstärke. Es gibt keinen OMNE-Server.
 
-> ⚠️ **OMNE ist noch in Entwicklung und kann Fehler haben. Standardmäßig ist es deaktiviert** (Reiter **OMNE**, Kästchen „OMNE aktivieren“).
+> ℹ️ OMNE ist standardmäßig **aus** (Reiter **OMNE**, Kästchen „OMNE aktivieren“).
 > Die Lautstärkesteuerung von Discord ist eingeschränkt: Sie funktioniert nur für als *App-Tester* eingetragene Personen (max. 50 pro App).
 
 ## 🚀 Ich will es nutzen! (Spieler)
@@ -71,7 +70,6 @@ Der Organisator gibt dir **Client ID**, **Client Secret** und einen **Webhook-Li
 
 ## ⚠️ Wichtige Hinweise
 
-- FFBL befindet sich **im Test** und kann Fehler haben.
 - Dalamud-Plugins werden **nicht von Square Enix unterstützt**. Nutzung auf eigene Gefahr.
 - Der **Webhook-Link ist wie ein Passwort**: nur mit deiner Gruppe teilen.
 - Die Leinwand benötigt das Plugin **Penumbra** und den Minion **Plush Cushion**.
@@ -80,5 +78,7 @@ Der Organisator gibt dir **Client ID**, **Client Secret** und einen **Webhook-Li
 ## 🤝 Mitmachen & Lizenz
 
 **Open Source** ([MIT](LICENSE)). Vorschläge, Korrekturen und Übersetzungen sind über **Issues** und **Pull Requests** willkommen.
+
+Die Leinwand nutzt den Mod **Background Screen** von **Anya Hichu** (mit Namensnennung in `penumbra/` enthalten).
 
 Von **Lusmar**, mit Liebe für die RP-Community von Eorzea. 💙
