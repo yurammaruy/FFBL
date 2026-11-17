@@ -119,8 +119,12 @@ public sealed class Plugin : IDalamudPlugin
     /// <summary>Cria o telao a poucos passos a frente do personagem, virado para ele.</summary>
     /// <summary>True se fui eu que criei/movi o telao nesta sessao (so entao ele aparece sem pedir permissao).</summary>
     internal bool MeuTelao { get; private set; }
+    /// <summary>Quem criou o telao e o dono. Se o bot ja informou o dono, vale o nome dele (e nao so "eu cliquei antes");
+    /// enquanto o bot nao respondeu (previa local), vale o meu clique.</summary>
     internal bool SouDono(TelaoInfo t)
-        => MeuTelao || string.Equals(t.Dono, NomePersonagem() ?? "", StringComparison.OrdinalIgnoreCase);
+        => string.IsNullOrEmpty(t.Dono)
+            ? MeuTelao
+            : string.Equals(t.Dono, NomePersonagem() ?? "", StringComparison.OrdinalIgnoreCase);
     internal bool TelaoPermitido(TelaoInfo t) => SouDono(t) || Config.ProjAceitarTelaoDeOutros;
 
     internal void CriarTelaoAqui(float largura, float altura)
@@ -176,6 +180,31 @@ public sealed class Plugin : IDalamudPlugin
             try { await Webhook.EnviarArquivoAsync(url, nome, avatar, "\U0001F5BC " + nome + " exibiu no telao:", caminho); MsgImagem = "Imagem enviada ao chat."; }
             catch (Exception ex) { Log.Warning(ex, "FFBL: nao consegui enviar a imagem"); MsgImagem = "A imagem nao foi para o chat: " + ex.Message; }
         });
+    }
+
+    /// <summary>Nome do mapa (ex.: "Mist") a partir do numero do territorio; se nao achar, "mapa N".</summary>
+    internal string NomeMapa(uint terr)
+    {
+        try
+        {
+            var folha = DataManager.GetExcelSheet<Lumina.Excel.Sheets.TerritoryType>();
+            if (folha != null && folha.TryGetRow(terr, out var linha))
+            {
+                var nome = linha.PlaceName.ValueNullable?.Name.ToString();
+                if (!string.IsNullOrEmpty(nome)) return nome;
+            }
+        }
+        catch { }
+        return "mapa " + terr;
+    }
+
+    /// <summary>Saida de emergencia: libera o telao de alguem que saiu do jogo.</summary>
+    internal void LiberarTelao()
+    {
+        MeuTelao = false;
+        Previa = null;
+        suprimirAte = DateTime.Now.AddSeconds(5);
+        Enviar("!telao liberar", ignorarLimite: true);
     }
 
     internal void RecolherTelao()

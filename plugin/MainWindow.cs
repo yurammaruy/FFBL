@@ -384,10 +384,17 @@ internal sealed class MainWindow : Window, IDisposable
         }
         ImGui.TextColored(cinza, Loc.T("O telao aparece no minion de quem o criou. O FFBL nao invoca nada no seu jogo."));
 
-        if (telao != null && !plugin.TelaoPermitido(telao))
+        if (telao != null && !plugin.SouDono(telao))
         {
+            // so existe um telao por vez: quem nao o criou so ve o aviso (nao mexe no telao dos outros)
             ImGui.Spacing();
-            ImGui.TextColored(cinza, Loc.T("Ha um telao ativo na sala, mas ele nao aparece no seu jogo porque voce desligou a opcao."));
+            var dono = string.IsNullOrEmpty(telao.Dono) ? "?" : telao.Dono;
+            ImGui.TextWrapped(string.Format(Loc.T("Ja existe um telao sendo usado, invocado por {0} em {1} (X {2:F1}, Z {3:F1})."),
+                dono, plugin.NomeMapa(telao.Territorio), telao.Pos.X, telao.Pos.Z));
+            if (!plugin.TelaoPermitido(telao))
+                ImGui.TextColored(cinza, Loc.T("Ele nao aparece no seu jogo porque voce desligou a opcao acima."));
+            ImGui.TextColored(cinza, Loc.T("Se essa pessoa saiu do jogo, voce pode liberar o telao."));
+            if (ImGui.Button(Loc.T("Liberar telao") + "##liberartelao")) plugin.LiberarTelao();
             return;
         }
 

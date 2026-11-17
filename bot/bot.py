@@ -1304,7 +1304,22 @@ async def executar_comando_chat(message: discord.Message, linha: str):
 
     if cmd == "telao":
         sub = arg.split()
+        # So existe UM telao por vez (ele mostra o que esta tocando no Discord; dois dariam conflito).
+        partes = (t.telao or "").split(" | ")
+        dono_atual = partes[7] if len(partes) >= 8 else ""
+        eu = plano(quem, 30)
+        if sub and sub[0].lower() in ("liberar", "forcar"):
+            # saida de emergencia: o dono saiu do jogo e o telao ficou preso
+            if t.telao:
+                await dizer(f"\U0001F4FA O telao de **{dono_atual or '?'}** foi liberado por **{eu}**.")
+            t.telao = None
+            t.pedir_painel()
+            return
         if sub and sub[0].lower() in ("recolher", "remover"):
+            if t.telao and dono_atual and dono_atual != eu:
+                await dizer(f"\U0001F6AB O telao foi criado por **{dono_atual}**; so essa pessoa pode recolher. "
+                            f"Se ela saiu do jogo, use `!telao liberar`.")
+                return
             t.telao = None
             t.pedir_painel()
             return
@@ -1339,6 +1354,13 @@ async def executar_comando_chat(message: discord.Message, linha: str):
                 x, y, z, w, h, g = (float(n) for n in sub[2:8])
             except ValueError:
                 await dizer("Telao: valores invalidos.")
+                return
+            if t.telao and dono_atual and dono_atual != eu:
+                await dizer(f"\U0001F6AB Ja existe um telao em uso, criado por **{dono_atual}** "
+                            f"(mapa n\u00ba {partes[0]}, x {partes[1]}, y {partes[2]}, z {partes[3]}). "
+                            f"So pode haver um telao por vez; peca para **{dono_atual}** recolher, "
+                            f"ou use `!telao liberar` se a pessoa saiu do jogo.")
+                t.pedir_painel()
                 return
             w = max(1.0, min(60.0, w))
             h = max(1.0, min(40.0, h))

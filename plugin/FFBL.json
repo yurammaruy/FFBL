@@ -3,7 +3,7 @@
   "Name": "FFBL",
   "InternalName": "FFBL",
   "Punchline": "Musica no Discord, controlada de dentro do jogo. Para RP com jogadores vanilla e com mods.",
-  "Description": "FFBL: uma playlist compartilhada que toca na sala de voz do Discord e e controlada de dentro do jogo (iPod, chat da sala, telao com a capa da musica). Inclui o OMNE (voz por proximidade, em teste). Comando: /ffbl",
+  "Description": "FFBL: uma playlist compartilhada que toca na sala de voz do Discord e é controlada de dentro do jogo (iPod, fila de musicas e telao com a capa da musica). Inclui o OMNE (voz por proximidade). Comando: /ffbl",
   "Tags": [
     "musica",
     "discord",
