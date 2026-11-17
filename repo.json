@@ -3,7 +3,7 @@
     "Author": "Lusmar",
     "Name": "FFBL",
     "InternalName": "FFBL",
-    "AssemblyVersion": "0.9.3.0",
+    "AssemblyVersion": "0.9.4.0",
     "Description": "FFBL: uma playlist compartilhada que toca na sala de voz do Discord e e controlada de dentro do jogo (iPod, chat da sala, telao com a capa da musica). Inclui o OMNE (voz por proximidade, em teste). Comando: /ffbl",
     "Punchline": "Musica no Discord, controlada de dentro do jogo. Para RP com jogadores vanilla e com mods.",
     "ApplicableVersion": "any",
@@ -23,6 +23,6 @@
     "DownloadLinkInstall": "https://github.com/yurammaruy/FFBL/releases/latest/download/latest.zip",
     "DownloadLinkTesting": "https://github.com/yurammaruy/FFBL/releases/latest/download/latest.zip",
     "DownloadLinkUpdate": "https://github.com/yurammaruy/FFBL/releases/latest/download/latest.zip",
-    "LastUpdate": 1794783673
+    "LastUpdate": 1794866223
   }
 ]
