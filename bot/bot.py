@@ -330,6 +330,10 @@ class Tocador:
             emb.set_thumbnail(url=m.thumb)
         emb.add_field(name="volume", value=str(self.volume), inline=True)
         emb.add_field(name="telao", value=self.telao or "nenhum", inline=True)
+        try:
+            emb.add_field(name="botid", value=str(self.guild.me.id), inline=True)  # o plugin usa para o volume pessoal
+        except Exception:
+            pass
         if self.video:
             emb.add_field(name="video", value=self.video[:1000], inline=False)
         if m is not None and self.musica_inicio:
@@ -1250,6 +1254,9 @@ AJUDA_CHAT = (
 )
 
 
+_avisou_apagar = False
+
+
 async def executar_comando_chat(message: discord.Message, linha: str):
     """Obedece um comando escrito no chat da sala de voz. O bot toca na PROPRIA sala do chat."""
     canal = message.channel
@@ -1268,11 +1275,20 @@ async def executar_comando_chat(message: discord.Message, linha: str):
     if cmd not in todos:
         return  # nao e um comando nosso: ignora (nao apaga a mensagem)
 
-    # apaga a mensagem do comando para o chat nao encher (precisa de "Gerenciar mensagens"; se nao tiver, segue)
-    try:
-        await message.delete()
-    except Exception:
-        pass
+    # Comandos de musica (tocar, pular, voltar, pausar/continuar) ficam visiveis no chat.
+    # Todo o resto (telao, painel, volume...) e apagado na hora para o chat nao encher
+    # (precisa de "Gerenciar mensagens" no canal; se faltar, avisa uma vez no console).
+    visiveis = {"tocar", "play", "p", "pular", "skip", "voltar", "pausar", "pause", "continuar", "resume", "alternar"}
+    if cmd not in visiveis:
+        try:
+            await message.delete()
+        except discord.Forbidden:
+            global _avisou_apagar
+            if not _avisou_apagar:
+                _avisou_apagar = True
+                print("[aviso] Nao consegui apagar um comando do chat: de ao bot a permissao 'Gerenciar mensagens' nesse canal.")
+        except Exception:
+            pass
 
     async def dizer(texto: str):
         await canal.send(texto, allowed_mentions=discord.AllowedMentions.none())
@@ -1635,6 +1651,43 @@ async def erro_comando(interaction: discord.Interaction, error: app_commands.App
 
 # ---------------------------------------------------------------- inicio
 
+def escolher_configuracao():
+    """Ao abrir, pergunta se mantem as configuracoes recentes ou comeca de novo (outra sala / outro bot)."""
+    cfg = ler_config()
+    sala = str(cfg.get("canal_chat_id", "")).strip()
+    tem_token = os.path.exists(ARQ_TOKEN)
+    if not sala.isdigit() and not tem_token:
+        return  # primeira vez: nada para perguntar
+    print()
+    print("=== Configuracoes salvas ===")
+    print(f"  Sala de texto: {sala if sala.isdigit() else '(nenhuma)'}")
+    print(f"  Token do bot:  {'salvo' if tem_token else '(nenhum)'}")
+    print()
+    print("  [Enter] ou 1 = Manter as configuracoes recentes")
+    print("  2 = Trocar so a sala (vou pedir o ID da nova sala)")
+    print("  3 = Comecar do zero (nova sala e novo token)")
+    print()
+    while True:
+        r = input("Escolha (Enter = manter): ").strip()
+        if r in ("", "1"):
+            return
+        if r == "2":
+            cfg["canal_chat_id"] = ""
+            salvar_config(cfg)
+            print("Ok: vou pedir a nova sala.")
+            return
+        if r == "3":
+            cfg["canal_chat_id"] = ""
+            salvar_config(cfg)
+            try:
+                os.remove(ARQ_TOKEN)
+            except OSError:
+                pass
+            print("Ok: vou pedir a nova sala e o token.")
+            return
+        print("Digite 1, 2 ou 3 (ou so Enter).")
+
+
 def garantir_sala_de_chat():
     """Na primeira vez (config sem sala), pergunta o ID da sala de texto onde o FFBL conversa com o bot."""
     cfg = ler_config()
@@ -1651,7 +1704,7 @@ def garantir_sala_de_chat():
         print("Precisa ser so numeros. Tente de novo.")
     cfg["canal_chat_id"] = novo
     salvar_config(cfg)
-    print("Salvo! Para trocar depois, apague o config.json ou edite o numero la.")
+    print("Salvo! Na proxima vez que abrir, o bot pergunta se voce quer manter ou trocar.")
     print()
 
 
@@ -1661,6 +1714,7 @@ def main():
         print("Rode o INSTALAR.bat de novo.")
         input("Aperte Enter para sair.")
         sys.exit(1)
+    escolher_configuracao()
     token = ler_token()
     garantir_sala_de_chat()
     try:

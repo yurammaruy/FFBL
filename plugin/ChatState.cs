@@ -7,7 +7,7 @@ internal sealed record TelaoInfo(uint Territorio, Vector3 Pos, float Largura, fl
 /// <summary>Video exibido no telao por alguem (o bot guarda o endereco e a hora em que comecou).</summary>
 internal sealed record VideoInfo(long InicioEpoch, string Url, string Quem);
 
-internal sealed record PanelInfo(string Estado, string Titulo, string Url, string Thumb, List<string> Fila, ulong MsgId, int Volume, TelaoInfo? Telao, VideoInfo? Video = null, long MusicaInicio = 0);
+internal sealed record PanelInfo(string Estado, string Titulo, string Url, string Thumb, List<string> Fila, ulong MsgId, int Volume, TelaoInfo? Telao, VideoInfo? Video = null, long MusicaInicio = 0, string BotId = "");
 
 internal sealed record ChatLine(string Id, string Author, string Text, bool IsBotReply, bool IsMine, DateTime Time);
 

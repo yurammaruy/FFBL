@@ -20,7 +20,7 @@ Pour celui ou celle qui **monte le salon** : configurer Discord, lancer le bot m
 
 ### 1.3 Inviter le bot sur votre serveur
 1. Dans **OAuth2 → URL Generator**, cochez les portées `bot` et `applications.commands`.
-2. Cochez les permissions : *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Connect*, *Speak*.
+2. Cochez les permissions : *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Manage Messages*, *Connect*, *Speak*.
 3. Ouvrez le lien généré et choisissez votre serveur.
 
 ### 1.4 Salons et webhook
@@ -42,7 +42,7 @@ Le bot est un programme qui **tourne sur votre ordinateur**. **Fermé, il ne jou
    winget install -e --id Python.Python.3.12
    ```
    Si `winget` est absent de votre Windows, installez Python depuis le Microsoft Store (cherchez « Python 3.12 »).
-2. Téléchargez le dossier **`bot`** de ce dépôt (bouton vert **Code → Download ZIP**, puis extrayez).
+2. Téléchargez uniquement le bot en un clic : [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clic droit sur le fichier → **Extraire tout**. (Seulement 3 fichiers ; inutile de télécharger tout le dépôt.)
 3. Double-cliquez sur **`INSTALAR.bat`** (première fois uniquement ; il télécharge ce dont le bot a besoin).
 4. Double-cliquez sur **`INICIAR.bat`**.
 5. La première fois, il demande le **token du bot** et l'**identifiant du salon**. Collez chacun et appuyez sur Entrée. Ils sont enregistrés.

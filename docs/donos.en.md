@@ -20,7 +20,7 @@ For whoever **sets up the room**: configure Discord, run the music bot and give 
 
 ### 1.3 Invite the bot to your server
 1. In **OAuth2 → URL Generator** tick the scopes `bot` and `applications.commands`.
-2. Tick permissions: *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Connect*, *Speak*.
+2. Tick permissions: *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Manage Messages*, *Connect*, *Speak*.
 3. Open the generated link and choose your server.
 
 ### 1.4 Rooms and webhook
@@ -42,7 +42,7 @@ The bot is a program that **runs on your computer**. **If it is closed, no music
    winget install -e --id Python.Python.3.12
    ```
    If `winget` is missing on your Windows, install Python from the Microsoft Store (search "Python 3.12").
-2. Download the **`bot`** folder from this repository (green **Code → Download ZIP** button, then extract).
+2. Download just the bot with one click: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Right-click the file → **Extract all**. (It is only 3 files; no need to download the whole repository.)
 3. Double-click **`INSTALAR.bat`** (first time only; it downloads what the bot needs).
 4. Double-click **`INICIAR.bat`**.
 5. The first time it asks for the **bot token** and the **room ID**. Paste each and press Enter. They are saved.

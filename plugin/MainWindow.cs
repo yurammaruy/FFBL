@@ -608,9 +608,9 @@ internal sealed class MainWindow : Window, IDisposable
         // ---- barra de volume (igual a da musica atual)
         var vMin = Pmin(BarraVolume);
         var vMax = Pmax(BarraVolume);
-        var volume = painel?.Volume ?? 100;
+        var volume = plugin.Config.VolumePessoal;
         dl.AddRectFilledMultiColor(vMin, vMax, Cor(0.35f, 0.62f, 0.95f), Cor(0.35f, 0.62f, 0.95f), Cor(0.10f, 0.32f, 0.72f), Cor(0.10f, 0.32f, 0.72f));
-        var nivel = Math.Clamp(volume / 150f, 0f, 1f);
+        var nivel = Math.Clamp(volume / 200f, 0f, 1f);
         dl.AddRectFilled(vMin, new Vector2(vMin.X + (vMax.X - vMin.X) * nivel, vMax.Y), Cor(1f, 1f, 1f, 0.28f));
         TextoCentralizado(dl, $"Volume {volume}%", (vMin + vMax) / 2, Cor(1f, 1f, 1f));
 
@@ -657,6 +657,7 @@ internal sealed class MainWindow : Window, IDisposable
         if (aba == Aba.Playlist)
         {
             if (resp.Length > 0 && (DateTime.Now - quando).TotalSeconds < 5) texto = resp;
+            if (plugin.MsgVolume.Length > 0) texto = plugin.MsgVolume;
         }
         if (texto.Length == 0) return;
 
@@ -676,8 +677,8 @@ internal sealed class MainWindow : Window, IDisposable
         // fechar: o icone desenhado no canto inferior direito da imagem (faz o mesmo que /ffbl)
         if (Zona("##fechar", ZFechar, "Fechar (volte com /ffbl)")) IsOpen = false;
 
-        if (Zona("##volmais", ZVolMais, "Volume +")) plugin.Enviar("!volume +", true);
-        if (Zona("##volmenos", ZVolMenos, "Volume -")) plugin.Enviar("!volume -", true);
+        if (Zona("##volmais", ZVolMais, "Volume +")) plugin.AjustarVolumePessoal(+10);
+        if (Zona("##volmenos", ZVolMenos, "Volume -")) plugin.AjustarVolumePessoal(-10);
 
         if (Zona("##menu", ZMenu, "MENU: alterna entre conectar e playlist"))
         {

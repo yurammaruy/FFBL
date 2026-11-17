@@ -99,6 +99,8 @@ public sealed class Plugin : IDalamudPlugin
         // telao de outra pessoa so e exibido se voce nao desligou a opcao (e nunca invoca nada no seu jogo)
         if (telaoParaMim != null && !TelaoPermitido(telaoParaMim)) telaoParaMim = null;
         Minion.Tick(telaoParaMim, Chat.Panel);
+        VigiarMeuTelao();
+        AplicarVolumePessoal();
         Omne.Tick();
     }
 
@@ -196,6 +198,85 @@ public sealed class Plugin : IDalamudPlugin
         }
         catch { }
         return "mapa " + terr;
+    }
+
+    // ------------------------------------------------------------ fim automatico do telao
+
+    private DateTime foraDoMapaDesde = DateTime.MinValue, semPersonagemDesde = DateTime.MinValue, proximaVigia = DateTime.MinValue;
+
+    /// <summary>Se EU criei o telao e saio do mapa (ou do personagem/jogo), ele e recolhido sozinho.</summary>
+    private void VigiarMeuTelao()
+    {
+        var t = Chat.Panel?.Telao;
+        var agora = DateTime.Now;
+        if (t == null || !SouDono(t) || !Conectado || agora < proximaVigia)
+        {
+            if (t == null || !SouDono(t)) { foraDoMapaDesde = DateTime.MinValue; semPersonagemDesde = DateTime.MinValue; }
+            return;
+        }
+        if (ObjectTable.LocalPlayer == null)
+        {
+            if (semPersonagemDesde == DateTime.MinValue) semPersonagemDesde = agora;
+            if ((agora - semPersonagemDesde).TotalSeconds > 4)
+            {
+                semPersonagemDesde = DateTime.MinValue;
+                proximaVigia = agora.AddSeconds(15);
+                LiberarTelao(); // sem personagem o nome nao confere, entao usa o comando de liberar
+            }
+            return;
+        }
+        semPersonagemDesde = DateTime.MinValue;
+        if (t.Territorio != ClientState.TerritoryType)
+        {
+            if (foraDoMapaDesde == DateTime.MinValue) foraDoMapaDesde = agora;
+            if ((agora - foraDoMapaDesde).TotalSeconds > 3)
+            {
+                foraDoMapaDesde = DateTime.MinValue;
+                proximaVigia = agora.AddSeconds(15);
+                RecolherTelao();
+            }
+        }
+        else foraDoMapaDesde = DateTime.MinValue;
+    }
+
+    // ------------------------------------------------------------ volume so para voce
+
+    internal string MsgVolume { get; private set; } = "";
+    private int volumeAplicado = -1;
+    private string botAplicado = "";
+    private DateTime proximoVolume = DateTime.MinValue;
+
+    /// <summary>Muda o volume da musica so no SEU Discord (nao mexe no volume do bot nem dos outros).</summary>
+    internal void AjustarVolumePessoal(int delta)
+    {
+        Config.VolumePessoal = Math.Clamp(Config.VolumePessoal + delta, 0, 200);
+        Config.VolumePessoalAjustado = true;
+        SalvarConfig();
+        volumeAplicado = -1;
+        MsgVolume = Omne.Rpc.Connected ? "" : "Para ajustar o volume so para voce, ative o OMNE (aba OMNE) e conecte.";
+    }
+
+    private void AplicarVolumePessoal()
+    {
+        if (!Config.VolumePessoalAjustado) return;
+        var agora = DateTime.Now;
+        if (agora < proximoVolume) return;
+        proximoVolume = agora.AddSeconds(1);
+        var bot = Chat.Panel?.BotId ?? "";
+        if (bot.Length == 0 || !Omne.Rpc.Connected) return;
+        var v = Config.VolumePessoal;
+        if (volumeAplicado == v && botAplicado == bot) return;
+        volumeAplicado = v; botAplicado = bot;
+        _ = Task.Run(async () =>
+        {
+            try { await Omne.Rpc.DefinirVolumeAsync(bot, v); MsgVolume = ""; }
+            catch (Exception ex)
+            {
+                volumeAplicado = -1;
+                MsgVolume = "O Discord recusou o ajuste de volume (so funciona para quem esta como testador do app).";
+                Log.Warning(ex, "FFBL: volume pessoal");
+            }
+        });
     }
 
     /// <summary>Saida de emergencia: libera o telao de alguem que saiu do jogo.</summary>
@@ -335,6 +416,17 @@ public sealed class Plugin : IDalamudPlugin
 
     public void Dispose()
     {
+        try
+        {
+            // se o telao e meu, recolhe antes de sair (melhor esforco, espera no maximo 2 s)
+            var t = Chat.Panel?.Telao;
+            if (t != null && SouDono(t) && Conectado && Webhook.Valido(Config.WebhookUrl))
+            {
+                var (_, nomeDiscord, avatar) = Chat.Me;
+                Webhook.EnviarAsync(Config.WebhookUrl, NomePersonagem() ?? nomeDiscord, avatar, "!telao liberar").Wait(TimeSpan.FromSeconds(2));
+            }
+        }
+        catch { /* ignora */ }
         try { Minion.Dispose(); } catch { /* ignora */ }
         try { Omne.Dispose(); } catch { /* ignora */ }
         PluginInterface.UiBuilder.Draw -= OnDraw;

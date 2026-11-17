@@ -118,16 +118,32 @@ internal sealed class TelaoMinion
 
 #pragma warning disable CS0618
     /// <summary>Acha o minion de OUTRA pessoa (o telao dela), so olhando a tabela de objetos; nao mexe em nada.</summary>
+    internal string DiagEspectador { get; private set; } = "";
+
     private bool AcharMinionDe(string dono, out nint endereco, out int indice)
     {
         endereco = 0; indice = -1;
+        DiagEspectador = "";
         if (string.IsNullOrEmpty(dono)) return false;
         uint donoId = 0;
         foreach (var o in Plugin.ObjectTable)
             if (o.ObjectKind == ObjectKind.Pc && string.Equals(o.Name.TextValue, dono, StringComparison.OrdinalIgnoreCase)) { donoId = o.EntityId; break; }
-        if (donoId == 0) return false;
+        if (donoId == 0)
+        {
+            var nomes = new List<string>();
+            foreach (var o in Plugin.ObjectTable)
+                if (o.ObjectKind == ObjectKind.Pc && nomes.Count < 6) nomes.Add(o.Name.TextValue);
+            DiagEspectador = $"dono '{dono}': jogador NAO achado por perto. Jogadores vistos: {string.Join(", ", nomes)}";
+            return false;
+        }
+        var minions = 0;
         foreach (var o in Plugin.ObjectTable)
-            if (o.ObjectKind == ObjectKind.Companion && o.ObjectIndex > 0 && o.OwnerId == donoId) { endereco = o.Address; indice = o.ObjectIndex; return true; }
+        {
+            if (o.ObjectKind != ObjectKind.Companion) continue;
+            minions++;
+            if (o.ObjectIndex > 0 && o.OwnerId == donoId) { endereco = o.Address; indice = o.ObjectIndex; return true; }
+        }
+        DiagEspectador = $"dono '{dono}': jogador achado, mas o minion dele NAO (minions vistos: {minions}).";
         return false;
     }
 
@@ -208,7 +224,7 @@ internal sealed class TelaoMinion
             // espectador: o minion de quem criou o telao nao esta por perto agora; nao invoca nada
             if (Ativo) { Desativar(); naoMexerAte = agora.AddSeconds(1.2); }
             visivelDesde = DateTime.MinValue;
-            Estado = "Aguardando o minion de " + telao.Dono + " ficar visivel perto de voce.";
+            Estado = "Aguardando o minion de " + telao.Dono + " ficar visivel perto de voce. " + DiagEspectador;
             return;
         }
         if (!achou)

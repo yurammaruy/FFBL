@@ -179,6 +179,10 @@ internal sealed class OmneRpc : IDisposable
         return Math.Abs(have - want) >= 2;
     }
 
+    /// <summary>Muda so no SEU Discord o volume de uma pessoa (ou do bot). 0 a 200.</summary>
+    public Task DefinirVolumeAsync(string userId, int percent)
+        => SetUserVolumeAsync(userId, Math.Clamp(percent, 0, 200), CancellationToken.None);
+
     private async Task SetUserVolumeAsync(string userId, int percent, CancellationToken ct)
     {
         var args = new JsonObject { ["user_id"] = userId, ["volume"] = percent };

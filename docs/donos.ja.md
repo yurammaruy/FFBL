@@ -20,7 +20,7 @@
 
 ### 1.3 ボットをサーバーに招待
 1. **OAuth2 → URL Generator**でスコープ `bot` と `applications.commands` にチェック。
-2. 権限：*View Channels*、*Send Messages*、*Embed Links*、*Attach Files*、*Read Message History*、*Connect*、*Speak*。
+2. 権限：*View Channels*、*Send Messages*、*Embed Links*、*Attach Files*、*Read Message History*、*Manage Messages*、*Connect*、*Speak*。
 3. 生成されたリンクを開き、サーバーを選択。
 
 ### 1.4 ルームとWebhook
@@ -42,7 +42,7 @@
    winget install -e --id Python.Python.3.12
    ```
    `winget` が使えない場合は、Microsoft Storeで「Python 3.12」を検索してインストールしてください。
-2. このリポジトリの**`bot`**フォルダをダウンロード（緑の**Code → Download ZIP**ボタン、その後展開）。
+2. ワンクリックでボットだけをダウンロード：[**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip)。ファイルを右クリック → **すべて展開**。（ファイルは3つだけです。リポジトリ全体をダウンロードする必要はありません。）
 3. **`INSTALAR.bat`**をダブルクリック（初回のみ。必要なものをダウンロードします）。
 4. **`INICIAR.bat`**をダブルクリック。
 5. 初回は**ボットのトークン**と**ルームID**を聞かれます。それぞれ貼り付けてEnter。保存されます。

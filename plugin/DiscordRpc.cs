@@ -334,6 +334,7 @@ internal sealed class DiscordRpc
             TelaoInfo? telao = null;
             VideoInfo? video = null;
             long musicaInicio = 0;
+            var botId = "";
             if (e["fields"] is JsonArray campos)
             {
                 foreach (var c in campos)
@@ -344,9 +345,10 @@ internal sealed class DiscordRpc
                     else if (nomeCampo == "telao") telao = LerTelao(valor);
                     else if (nomeCampo == "video") video = LerVideo(valor);
                     else if (nomeCampo == "inicio") long.TryParse(valor, out musicaInicio);
+                    else if (nomeCampo == "botid") botId = valor.Trim();
                 }
             }
-            chat.SetPanel(new PanelInfo(estado, estado == "Parado" ? "" : titulo, url, thumb, fila, id, volume, telao, video, musicaInicio));
+            chat.SetPanel(new PanelInfo(estado, estado == "Parado" ? "" : titulo, url, thumb, fila, id, volume, telao, video, musicaInicio, botId));
             return;
         }
     }

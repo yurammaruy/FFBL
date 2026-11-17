@@ -20,7 +20,7 @@ Este guia é para quem vai **montar a sala**: configurar o Discord, ligar o bot 
 
 ### 1.3 Convidar o bot para o seu servidor
 1. Em **OAuth2 → URL Generator**, marque os escopos `bot` e `applications.commands`.
-2. Nas permissões, marque: *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Connect*, *Speak*.
+2. Nas permissões, marque: *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Manage Messages*, *Connect*, *Speak*.
 3. Abra o link gerado e escolha o seu servidor.
 
 ### 1.4 Salas e webhook
@@ -42,7 +42,7 @@ O bot é um programa que **roda no seu computador**. **Se ele estiver fechado, n
    winget install -e --id Python.Python.3.12
    ```
    Se o `winget` não existir no seu Windows, instale o Python pela Microsoft Store (procure por "Python 3.12").
-2. Baixe a pasta **`bot`** deste repositório (botão verde **Code → Download ZIP** e extraia).
+2. Baixe só o bot com um clique: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clique com o botão direito no arquivo → **Extrair tudo**. (São só 3 arquivos; não precisa baixar o repositório inteiro.)
 3. Dê dois cliques em **`INSTALAR.bat`** (só na primeira vez; ele baixa o que o bot precisa).
 4. Dê dois cliques em **`INICIAR.bat`**.
 5. Na primeira vez ele pede o **token do bot** e o **ID da sala**. Cole cada um e aperte Enter. Ficam salvos.

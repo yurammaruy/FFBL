@@ -33,7 +33,8 @@ public sealed class Configuration : IPluginConfiguration
     public bool OmneAtivo { get; set; } = false;
     public OmneConfig Omne { get; set; } = new();
 
-    public bool ProjUsarMinion { get; set; } = false;
+    public int VolumePessoal { get; set; } = 100;           // volume da musica so para voce (0 a 200), via Discord
+    public bool VolumePessoalAjustado { get; set; } = false; // so mexe no Discord depois que voce usar os botoes
     public bool ProjAceitarTelaoDeOutros { get; set; } = true;  // ver o telao de OUTRA pessoa (so visual: nao invoca nada no seu jogo)
     public uint ProjMinionId { get; set; } = 0;           // 0 = Plush Cushion
     public float ProjBaseLargura { get; set; } = 3f;      // tamanho natural da parede (calibragem)

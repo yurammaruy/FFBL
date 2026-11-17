@@ -20,7 +20,7 @@ Für alle, die den **Raum aufbauen**: Discord einrichten, den Musikbot starten u
 
 ### 1.3 Bot auf den Server einladen
 1. Unter **OAuth2 → URL Generator** die Scopes `bot` und `applications.commands` anhaken.
-2. Berechtigungen: *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Connect*, *Speak*.
+2. Berechtigungen: *View Channels*, *Send Messages*, *Embed Links*, *Attach Files*, *Read Message History*, *Manage Messages*, *Connect*, *Speak*.
 3. Den erzeugten Link öffnen und deinen Server wählen.
 
 ### 1.4 Kanäle und Webhook
@@ -42,7 +42,7 @@ Der Bot ist ein Programm, das **auf deinem Computer läuft**. **Ist es geschloss
    winget install -e --id Python.Python.3.12
    ```
    Fehlt `winget` unter deinem Windows, installiere Python über den Microsoft Store (nach „Python 3.12“ suchen).
-2. Den Ordner **`bot`** aus diesem Repository herunterladen (grüner Button **Code → Download ZIP**, dann entpacken).
+2. Nur den Bot mit einem Klick herunterladen: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Rechtsklick auf die Datei → **Alle extrahieren**. (Es sind nur 3 Dateien; das ganze Repository ist nicht nötig.)
 3. **`INSTALAR.bat`** doppelklicken (nur beim ersten Mal; lädt, was der Bot braucht).
 4. **`INICIAR.bat`** doppelklicken.
 5. Beim ersten Start fragt er nach **Bot-Token** und **Kanal-ID**. Jeweils einfügen und Enter drücken. Beides wird gespeichert.
