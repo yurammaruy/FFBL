@@ -42,11 +42,12 @@ O bot é um programa que **roda no seu computador**. **Se ele estiver fechado, n
    winget install -e --id Python.Python.3.12
    ```
    Se o `winget` não existir no seu Windows, instale o Python pela Microsoft Store (procure por "Python 3.12").
-2. Baixe só o bot com um clique: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clique com o botão direito no arquivo → **Extrair tudo**. (São só 3 arquivos; não precisa baixar o repositório inteiro.)
+2. Baixe só o bot com um clique: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clique com o botão direito no arquivo → **Extrair tudo**. (São poucos arquivos; não precisa baixar o repositório inteiro.)
 3. Dê dois cliques em **`INSTALAR.bat`** (só na primeira vez; ele baixa o que o bot precisa).
-4. Dê dois cliques em **`INICIAR.bat`**.
-5. Na primeira vez ele pede o **token do bot** e o **ID da sala**. Cole cada um e aperte Enter. Ficam salvos.
-6. Entre na sala de voz e digite `/tocar` (ou `!tocar nome da música` no chat da sala de voz). O bot entra sozinho na sua sala. Use `/teste` para ouvir um apito e conferir o som.
+4. Dê dois cliques em **`INICIAR.bat`**. Abre o **painel do bot**.
+5. No painel, cole o **token do bot** e clique em **Salvar token**. Depois clique em **Adicionar sala**, dê um nome e cole o **ID da sala de voz**. As salas ficam salvas; **só uma fica ligada por vez**.
+6. Escolha a sala na lista e clique em **Ligar nesta sala**. Se você **minimizar** o painel, ele vai para perto do relógio e o bot continua tocando. Para trocar de sala, escolha outra e clique em Ligar de novo.
+7. Entre na sala de voz e digite `/tocar` (ou `!tocar nome da música` no chat da sala de voz). O bot entra sozinho na sua sala. Use `/teste` para ouvir um apito e conferir o som.
 
 > Os arquivos `token.txt` e `config.json` ficam **só no seu computador** e já estão bloqueados no `.gitignore`.
 

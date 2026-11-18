@@ -44,7 +44,7 @@ internal sealed class MainWindow : Window, IDisposable
     private bool telaoAtivo;
     private DateTime telaoEnviadoEm = DateTime.MinValue;
 
-    private string clientId = "", clientSecret = "", webhook = "", avisoConfig = "";
+    private string clientId = "", clientSecret = "", webhook = "", avisoConfig = "", codigoConexao = "";
 
     public MainWindow(Plugin plugin) : base("FFBL###FFBL_Main")
     {
@@ -197,12 +197,35 @@ internal sealed class MainWindow : Window, IDisposable
         }
 
         var largura = (Tela.Z - Tela.X) * sc - 150;
+
+        ImGui.Text(Loc.T("Codigo de conexao (quem criou a sala te passa)"));
+        ImGui.SetNextItemWidth(largura);
+        ImGui.InputText("##codigoconexao", ref codigoConexao, 512);
+        ImGui.SameLine();
+        if (ImGui.Button(Loc.T("Aplicar codigo")))
+        {
+            if (CodigoConexao.TentarLer(codigoConexao, out var d, out var erroCodigo) && d != null)
+            {
+                clientId = d.ClientId; clientSecret = d.ClientSecret; webhook = d.WebhookUrl;
+                plugin.Config.ClientId = clientId; plugin.Config.ClientSecret = clientSecret; plugin.Config.WebhookUrl = webhook;
+                plugin.Config.Omne.ClientId = clientId; plugin.Config.Omne.ClientSecret = clientSecret;
+                plugin.Config.Omne.ChannelId = d.SalaId;
+                plugin.SalvarConfig();
+                codigoConexao = "";
+                avisoConfig = "Codigo aplicado. Agora clique em Conectar.";
+            }
+            else avisoConfig = erroCodigo;
+        }
+
+        if (ImGui.CollapsingHeader(Loc.T("Preencher a mao (avancado)") + "###maoconfig"))
+        {
         ImGui.SetNextItemWidth(largura);
         ImGui.InputText("Client ID", ref clientId, 64);
         ImGui.SetNextItemWidth(largura);
         ImGui.InputText("Client Secret", ref clientSecret, 128, ImGuiInputTextFlags.Password);
         ImGui.SetNextItemWidth(largura);
         ImGui.InputText("Webhook", ref webhook, 256, ImGuiInputTextFlags.Password);
+        }
 
         var auto = plugin.Config.ConectarAoAbrir;
         if (ImGui.Checkbox(Loc.T("Conectar sozinho ao abrir o jogo"), ref auto))

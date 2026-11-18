@@ -30,7 +30,7 @@ if exist "venv\Scripts\python.exe" goto venv_ok
 if errorlevel 1 goto erro_venv
 :venv_ok
 "venv\Scripts\python.exe" -m pip install --upgrade pip --disable-pip-version-check -q
-"venv\Scripts\python.exe" -m pip install --upgrade "discord.py[voice]>=2.7.1" "davey==0.1.7" "yt-dlp[default]" --disable-pip-version-check
+"venv\Scripts\python.exe" -m pip install --upgrade "discord.py[voice]>=2.7.1" "davey==0.1.7" "yt-dlp[default]" pystray pillow --disable-pip-version-check
 if errorlevel 1 goto erro_pip
 echo Pecas prontas.
 echo.

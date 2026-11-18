@@ -3,7 +3,7 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <AssemblyName>FFBL</AssemblyName>
     <RootNamespace>FFBL</RootNamespace>
-    <Version>0.9.6.0</Version>
+    <Version>0.9.7.0</Version>
     <Authors>Lusmar</Authors>
     <Description>Controle a musica da sala de voz do Discord de dentro do jogo.</Description>
     <ImplicitUsings>enable</ImplicitUsings>

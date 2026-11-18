@@ -42,11 +42,12 @@ The bot is a program that **runs on your computer**. **If it is closed, no music
    winget install -e --id Python.Python.3.12
    ```
    If `winget` is missing on your Windows, install Python from the Microsoft Store (search "Python 3.12").
-2. Download just the bot with one click: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Right-click the file → **Extract all**. (It is only 3 files; no need to download the whole repository.)
+2. Download just the bot with one click: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Right-click the file → **Extract all**. (It is only a few files; no need to download the whole repository.)
 3. Double-click **`INSTALAR.bat`** (first time only; it downloads what the bot needs).
-4. Double-click **`INICIAR.bat`**.
-5. The first time it asks for the **bot token** and the **room ID**. Paste each and press Enter. They are saved.
-6. Join the voice room and type `/tocar` (or `!tocar song name` in the voice room's chat). The bot joins your room by itself. Use `/teste` to hear a beep and check the sound.
+4. Double-click **`INICIAR.bat`**. The **bot panel** opens.
+5. In the panel, paste the **bot token** and click **Save token**. Then click **Add room**, give it a name and paste the **voice room ID**. Rooms are remembered; **only one is on at a time**.
+6. Pick the room in the list and click **Turn on in this room**. If you **minimize** the panel, it goes next to the clock and the bot keeps playing. To change rooms, pick another and click the button again.
+7. Join the voice room and type `/tocar` (or `!tocar song name` in the voice room's chat). The bot joins your room by itself. Use `/teste` to hear a beep and check the sound.
 
 > `token.txt` and `config.json` stay **only on your computer** and are already blocked by `.gitignore`.
 

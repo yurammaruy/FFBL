@@ -42,11 +42,12 @@ Der Bot ist ein Programm, das **auf deinem Computer läuft**. **Ist es geschloss
    winget install -e --id Python.Python.3.12
    ```
    Fehlt `winget` unter deinem Windows, installiere Python über den Microsoft Store (nach „Python 3.12“ suchen).
-2. Nur den Bot mit einem Klick herunterladen: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Rechtsklick auf die Datei → **Alle extrahieren**. (Es sind nur 3 Dateien; das ganze Repository ist nicht nötig.)
+2. Nur den Bot mit einem Klick herunterladen: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Rechtsklick auf die Datei → **Alle extrahieren**. (Es sind nur wenige Dateien; das ganze Repository ist nicht nötig.)
 3. **`INSTALAR.bat`** doppelklicken (nur beim ersten Mal; lädt, was der Bot braucht).
-4. **`INICIAR.bat`** doppelklicken.
-5. Beim ersten Start fragt er nach **Bot-Token** und **Kanal-ID**. Jeweils einfügen und Enter drücken. Beides wird gespeichert.
-6. Den Sprachkanal betreten und `/tocar` eingeben (oder `!tocar Liedname` im Chat des Sprachkanals). Der Bot tritt selbst bei. Mit `/teste` hörst du einen Piepton und prüfst den Ton.
+4. **`INICIAR.bat`** doppelklicken. Das **Bot-Fenster** öffnet sich.
+5. Im Fenster den **Bot-Token** einfügen und auf **Salvar token** (Token speichern) klicken. Dann **Adicionar sala** (Raum hinzufügen) klicken, einen Namen vergeben und die **ID des Sprachkanals** einfügen. Räume werden gespeichert; **nur einer ist gleichzeitig aktiv**.
+6. Den Raum in der Liste wählen und **Ligar nesta sala** (In diesem Raum starten) klicken. Beim **Minimieren** wandert das Fenster neben die Uhr, der Bot spielt weiter. Zum Wechseln einen anderen Raum wählen und erneut klicken.
+7. Den Sprachkanal betreten und `/tocar` eingeben eingeben (oder `!tocar Liedname` im Chat des Sprachkanals). Der Bot tritt selbst bei. Mit `/teste` hörst du einen Piepton und prüfst den Ton.
 
 > `token.txt` und `config.json` bleiben **nur auf deinem Computer** und sind in `.gitignore` bereits gesperrt.
 

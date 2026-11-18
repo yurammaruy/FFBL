@@ -1,6 +1,7 @@
 # nunca publicar segredos
 token.txt
 config.json
+salas.json
 *.log
 voz.log
 **/pluginConfigs/

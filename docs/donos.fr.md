@@ -42,11 +42,12 @@ Le bot est un programme qui **tourne sur votre ordinateur**. **Fermé, il ne jou
    winget install -e --id Python.Python.3.12
    ```
    Si `winget` est absent de votre Windows, installez Python depuis le Microsoft Store (cherchez « Python 3.12 »).
-2. Téléchargez uniquement le bot en un clic : [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clic droit sur le fichier → **Extraire tout**. (Seulement 3 fichiers ; inutile de télécharger tout le dépôt.)
+2. Téléchargez uniquement le bot en un clic : [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clic droit sur le fichier → **Extraire tout**. (Seulement quelques fichiers ; inutile de télécharger tout le dépôt.)
 3. Double-cliquez sur **`INSTALAR.bat`** (première fois uniquement ; il télécharge ce dont le bot a besoin).
-4. Double-cliquez sur **`INICIAR.bat`**.
-5. La première fois, il demande le **token du bot** et l'**identifiant du salon**. Collez chacun et appuyez sur Entrée. Ils sont enregistrés.
-6. Rejoignez le salon vocal et tapez `/tocar` (ou `!tocar nom du morceau` dans le chat du salon vocal). Le bot vous rejoint tout seul. `/teste` joue un bip pour vérifier le son.
+4. Double-cliquez sur **`INICIAR.bat`**. Le **panneau du bot** s'ouvre.
+5. Dans le panneau, collez le **token du bot** et cliquez sur **Salvar token** (enregistrer le token). Puis **Adicionar sala** (ajouter un salon), donnez un nom et collez l'**identifiant du salon vocal**. Les salons sont mémorisés ; **un seul est actif à la fois**.
+6. Choisissez le salon dans la liste et cliquez sur **Ligar nesta sala** (démarrer dans ce salon). Si vous **réduisez** le panneau, il va près de l'horloge et le bot continue. Pour changer de salon, choisissez-en un autre et cliquez à nouveau.
+7. Rejoignez le salon vocal et tapez `/tocar` (ou `!tocar nom du morceau` dans le chat du salon vocal). Le bot vous rejoint tout seul. `/teste` joue un bip pour vérifier le son.
 
 > `token.txt` et `config.json` restent **uniquement sur votre ordinateur** et sont déjà bloqués par `.gitignore`.
 

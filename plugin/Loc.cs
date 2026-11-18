@@ -18,6 +18,9 @@ internal static class Loc
 
     private static readonly Dictionary<string, string[]> Tabela = new()
     {
+        { "Codigo de conexao (quem criou a sala te passa)", new[] { "Connection code (from whoever set up the room)", "接続コード（ルームを作った人から受け取る）", "Verbindungscode (vom Ersteller des Raums)", "Code de connexion (donné par le créateur de la salle)" } },
+        { "Aplicar codigo", new[] { "Apply code", "コードを適用", "Code anwenden", "Appliquer le code" } },
+        { "Preencher a mao (avancado)", new[] { "Fill in manually (advanced)", "手動で入力（上級者向け）", "Manuell ausfüllen (erweitert)", "Remplir à la main (avancé)" } },
         { "Projecao", new[] { "Projection", "投影", "Projektion", "Projection" } },
         { "Idioma", new[] { "Language", "言語", "Sprache", "Langue" } },
         { "Telao", new[] { "Screen", "スクリーン", "Leinwand", "Écran" } },

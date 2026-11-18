@@ -25,6 +25,12 @@ ARQ_LOG = os.path.join(PASTA, "erros.log")
 ARQ_CONFIG = os.path.join(PASTA, "config.json")
 
 # Sala do chat (editavel no config.json ou na pagina de teste) e porta local
+# Quando aberto pelo painel (FFBL_Painel.pyw) nao ha console para perguntas: nunca espera teclado.
+SEM_PERGUNTAS = bool(os.environ.get("FFBL_SEM_PERGUNTAS"))
+if SEM_PERGUNTAS:
+    import builtins
+    builtins.input = lambda *a, **k: ""
+
 CONFIG_PADRAO = {"canal_chat_id": "", "porta": 8765, "atraso_inicio": 6}
 LIMITE_TEXTO = 500
 PREFIXO_CHAT = "!"  # comandos escritos no chat da sala, ex.: !tocar nome da musica          # letras por mensagem enviada pelo chat
@@ -904,6 +910,23 @@ class PonteChat:
         await self.transmitir({"tipo": "msg", "autor": nome, "texto": texto,
                                "hora": time.strftime("%H:%M"), "bot": False})
 
+    async def trocar_sala(self, novo: str):
+        """Usado pela janela: troca a sala ativa. Devolve None se deu certo, ou o texto do erro."""
+        novo = str(novo).strip()
+        if not novo.isdigit():
+            return "O ID da sala precisa ser so numeros."
+        antigo = self.cfg.get("canal_chat_id")
+        self.cfg["canal_chat_id"] = novo
+        erro = await self.carregar_canal()
+        if erro:
+            self.cfg["canal_chat_id"] = antigo
+            await self.carregar_canal()
+            return erro
+        salvar_config(self.cfg)
+        for c in list(self.clientes):
+            await self.enviar_estado(c)
+        return None
+
     async def tratar_troca(self, ws, dados: dict):
         novo = str(dados.get("id", "")).strip()
         if not novo.isdigit():
@@ -1653,6 +1676,8 @@ async def erro_comando(interaction: discord.Interaction, error: app_commands.App
 
 def escolher_configuracao():
     """Ao abrir, pergunta se mantem as configuracoes recentes ou comeca de novo (outra sala / outro bot)."""
+    if SEM_PERGUNTAS:
+        return
     cfg = ler_config()
     sala = str(cfg.get("canal_chat_id", "")).strip()
     tem_token = os.path.exists(ARQ_TOKEN)
@@ -1693,6 +1718,9 @@ def garantir_sala_de_chat():
     cfg = ler_config()
     if str(cfg.get("canal_chat_id", "")).strip().isdigit():
         return
+    if SEM_PERGUNTAS:
+        print("ERRO: falta o ID da sala. Escolha uma sala no painel e ligue de novo.")
+        sys.exit(1)
     print()
     print("Falta dizer qual e a SALA DE TEXTO do FFBL (a sala onde esta o webhook).")
     print("No Discord: botao direito na sala > Copiar ID do canal.")
@@ -1708,15 +1736,8 @@ def garantir_sala_de_chat():
     print()
 
 
-def main():
-    if not shutil.which("ffmpeg"):
-        print("ERRO: o programa de audio (ffmpeg) nao foi encontrado.")
-        print("Rode o INSTALAR.bat de novo.")
-        input("Aperte Enter para sair.")
-        sys.exit(1)
-    escolher_configuracao()
-    token = ler_token()
-    garantir_sala_de_chat()
+def configurar_logs():
+    """Registro de erros e da conexao de voz (usado pelo modo console e pela janela)."""
     try:
         open(ARQ_LOG, "w").close()  # comeca um registro de erros novo a cada abertura
     except OSError:
@@ -1736,6 +1757,18 @@ def main():
                 lg.setLevel(logging.DEBUG)
     except OSError:
         pass
+
+
+def main():
+    if not shutil.which("ffmpeg"):
+        print("ERRO: o programa de audio (ffmpeg) nao foi encontrado.")
+        print("Rode o INSTALAR.bat de novo.")
+        input("Aperte Enter para sair.")
+        sys.exit(1)
+    escolher_configuracao()
+    token = ler_token()
+    garantir_sala_de_chat()
+    configurar_logs()
     try:
         bot.run(token, log_level=logging.WARNING)
     except discord.PrivilegedIntentsRequired:

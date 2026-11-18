@@ -95,7 +95,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          Compress-Archive -Path "bot/bot.py","bot/INSTALAR.bat","bot/INICIAR.bat" -DestinationPath FFBL-bot.zip -Force
+          Compress-Archive -Path "bot/bot.py","bot/FFBL_Painel.pyw","bot/INSTALAR.bat","bot/INICIAR.bat","bot/INICIAR_CONSOLE.bat","bot/icon.png" -DestinationPath FFBL-bot.zip -Force
           gh release upload "${{ github.event.release.tag_name }}" FFBL-bot.zip --clobber
 
       - name: Atualizar o repo.json no repositorio
