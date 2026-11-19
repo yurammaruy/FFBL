@@ -62,7 +62,7 @@ Kurzfassung: In Dalamud `/xlsettings` → **Experimental** → **Benutzerdefinie
 https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 ```
 
-Der Organisator gibt dir **Client ID**, **Client Secret** und einen **Webhook-Link**.
+Der Organisator gibt dir einen **Verbindungscode** (beginnt mit `FFBL1-`). Füge ihn in FFBL ein, und alles wird automatisch ausgefüllt.
 
 ## 🏠 Ich will meinen eigenen Raum aufbauen! (Kanalbesitzer)
 

@@ -120,14 +120,21 @@ internal sealed class TelaoMinion
     /// <summary>Acha o minion de OUTRA pessoa (o telao dela), so olhando a tabela de objetos; nao mexe em nada.</summary>
     internal string DiagEspectador { get; private set; } = "";
 
-    private bool AcharMinionDe(string dono, out nint endereco, out int indice)
+    private unsafe bool AcharMinionDe(string dono, out nint endereco, out int indice)
     {
         endereco = 0; indice = -1;
         DiagEspectador = "";
         if (string.IsNullOrEmpty(dono)) return false;
         uint donoId = 0;
+        nint apontado = 0;
         foreach (var o in Plugin.ObjectTable)
-            if (o.ObjectKind == ObjectKind.Pc && string.Equals(o.Name.TextValue, dono, StringComparison.OrdinalIgnoreCase)) { donoId = o.EntityId; break; }
+            if (o.ObjectKind == ObjectKind.Pc && string.Equals(o.Name.TextValue, dono, StringComparison.OrdinalIgnoreCase))
+            {
+                donoId = o.EntityId;
+                var ch = (FFXIVClientStructs.FFXIV.Client.Game.Character.Character*)o.Address;
+                if (ch != null) apontado = (nint)ch->CompanionObject; // o proprio personagem aponta para o minion dele
+                break;
+            }
         if (donoId == 0)
         {
             var nomes = new List<string>();
@@ -141,9 +148,9 @@ internal sealed class TelaoMinion
         {
             if (o.ObjectKind != ObjectKind.Companion) continue;
             minions++;
-            if (o.ObjectIndex > 0 && o.OwnerId == donoId) { endereco = o.Address; indice = o.ObjectIndex; return true; }
+            if (o.ObjectIndex > 0 && (o.Address == apontado || o.OwnerId == donoId)) { endereco = o.Address; indice = o.ObjectIndex; return true; }
         }
-        DiagEspectador = $"dono '{dono}': jogador achado, mas o minion dele NAO (minions vistos: {minions}).";
+        DiagEspectador = $"dono '{dono}': jogador achado, mas o minion dele NAO (minions vistos: {minions}; ponteiro do dono: {(apontado == 0 ? "vazio" : "preenchido")}).";
         return false;
     }
 
@@ -191,7 +198,8 @@ internal sealed class TelaoMinion
             estavaLocal = false;
             invocarPendente = false;
             tentativasInvocar = 0;
-            Estado = telao == null ? "Sem telao criado." : "O telao esta em outro lugar.";
+            Estado = telao == null ? "Sem telao criado."
+                : $"O telao esta em outro lugar (telao no mapa {telao.Territorio}, voce no mapa {Plugin.ClientState.TerritoryType}).";
 
             if (dispensarPendente && agora >= naoMexerAte)
             {
@@ -212,6 +220,7 @@ internal sealed class TelaoMinion
 
         if (agora >= proximaChecagem) { PenumbraOk = pen.Disponivel(); proximaChecagem = agora.AddSeconds(3); }
         if (!PenumbraOk) { Estado = "O Penumbra nao respondeu. Ele esta instalado e ligado?"; return; }
+        if (!souDono) Estado = "Procurando o minion de " + telao.Dono + "...";
 
         if (Plugin.ObjectTable.LocalPlayer == null) return;
 
@@ -312,7 +321,11 @@ internal sealed class TelaoMinion
             Fixar(enderecoMinion, telao);
         }
 
-        Estado = !aparecido ? "Preparando o minion..." : Ativo ? "Telao ativo no seu minion." : "Preparando a imagem...";
+        var quem = souDono ? "seu minion" : "o minion de " + telao.Dono;
+        Estado = !aparecido ? $"Achei {quem} (objeto {indice}). Preparando..."
+            : Ativo ? $"Telao aplicado em {quem} (objeto {indice})."
+            : "Preparando a imagem...";
+        if (!souDono && aparecido && string.IsNullOrEmpty(arquivoAtual)) Estado += " Esperando a imagem ficar pronta.";
     }
 
     internal static readonly string[] ExtImagem = { ".png", ".jpg", ".jpeg", ".bmp", ".webp", ".tif", ".tiff" };

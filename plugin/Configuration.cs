@@ -1,4 +1,5 @@
 using Dalamud.Configuration;
+using Newtonsoft.Json;
 
 namespace FFBL;
 
@@ -7,15 +8,12 @@ public sealed class Configuration : IPluginConfiguration
 {
     public int Version { get; set; } = 1;
 
-    // App do Discord (o mesmo do OMNE serve)
-    public string ClientId { get; set; } = "";
-    public string ClientSecret { get; set; } = "";
-    public string AccessToken { get; set; } = "";
-
-    // Link do webhook da sala de voz (funciona como senha: nao compartilhe)
-    public string WebhookUrl { get; set; } = "";
-
-    public bool ConectarAoAbrir { get; set; } = false;
+    // Dados de conexao: NUNCA vao para o arquivo de configuracao comum.
+    // Ficam so no cofre criptografado (CofreConexao) e sao apagados quando o personagem desconecta.
+    [JsonIgnore] public string ClientId { get; set; } = "";
+    [JsonIgnore] public string ClientSecret { get; set; } = "";
+    [JsonIgnore] public string AccessToken { get; set; } = "";
+    [JsonIgnore] public string WebhookUrl { get; set; } = "";
 
     // Tamanho do iPod na tela (1.0 = tamanho original da imagem)
     public float Escala { get; set; } = 0.5f;
@@ -58,10 +56,10 @@ public sealed class Configuration : IPluginConfiguration
 [Serializable]
 public sealed class OmneConfig
 {
-    public string ClientId { get; set; } = "";
-    public string ClientSecret { get; set; } = "";
-    public string AccessToken { get; set; } = "";
-    public string ChannelId { get; set; } = "";
+    [JsonIgnore] public string ClientId { get; set; } = "";
+    [JsonIgnore] public string ClientSecret { get; set; } = "";
+    [JsonIgnore] public string AccessToken { get; set; } = "";
+    [JsonIgnore] public string ChannelId { get; set; } = "";
     public bool ProximityEnabled { get; set; } = true;
     public float FullDistance { get; set; } = 5f;
     public float MaxDistance { get; set; } = 20f;

@@ -62,7 +62,7 @@ Quick version: in Dalamud, `/xlsettings` → **Experimental** → **Custom Plugi
 https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 ```
 
-The group organizer will give you a **Client ID**, a **Client Secret** and a **webhook link**.
+The group organizer will give you a **connection code** (starts with `FFBL1-`). Paste it into FFBL and everything fills in by itself.
 
 ## 🏠 I want to set up my own room! (channel owners)
 

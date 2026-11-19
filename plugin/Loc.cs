@@ -21,6 +21,8 @@ internal static class Loc
         { "Codigo de conexao (quem criou a sala te passa)", new[] { "Connection code (from whoever set up the room)", "接続コード（ルームを作った人から受け取る）", "Verbindungscode (vom Ersteller des Raums)", "Code de connexion (donné par le créateur de la salle)" } },
         { "Aplicar codigo", new[] { "Apply code", "コードを適用", "Code anwenden", "Appliquer le code" } },
         { "Preencher a mao (avancado)", new[] { "Fill in manually (advanced)", "手動で入力（上級者向け）", "Manuell ausfüllen (erweitert)", "Remplir à la main (avancé)" } },
+        { "Cole o codigo de conexao na aba FFBL para preencher os dados do OMNE.", new[] { "Paste the connection code in the FFBL tab to fill in the OMNE details.", "FFBLタブに接続コードを貼り付けると、OMNEの情報が入力されます。", "Füge den Verbindungscode im Tab FFBL ein, um die OMNE-Daten auszufüllen.", "Collez le code de connexion dans l'onglet FFBL pour remplir les infos d'OMNE." } },
+        { "Detalhes tecnicos", new[] { "Technical details", "技術的な詳細", "Technische Details", "Détails techniques" } },
         { "Projecao", new[] { "Projection", "投影", "Projektion", "Projection" } },
         { "Idioma", new[] { "Language", "言語", "Sprache", "Langue" } },
         { "Telao", new[] { "Screen", "スクリーン", "Leinwand", "Écran" } },

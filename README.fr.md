@@ -62,7 +62,7 @@ En bref : dans Dalamud, `/xlsettings` → **Experimental** → **Dépôts de plu
 https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 ```
 
-L'organisateur vous donnera un **Client ID**, un **Client Secret** et un **lien webhook**.
+L'organisateur vous donnera un **code de connexion** (commence par `FFBL1-`). Collez-le dans FFBL et tout se remplit tout seul.
 
 ## 🏠 Je veux monter mon propre salon ! (propriétaires)
 

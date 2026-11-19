@@ -417,6 +417,7 @@ class Tocador:
 
                 vc.play(discord.PCMVolumeTransformer(fonte, volume=self.volume / 100), after=depois)
                 self.musica_inicio = time.time()
+                print(f"[acao] Tocando: {musica.titulo} (pedido por {musica.pedido_por})")
                 await self.avisar(
                     f"Tocando agora: **{curto(musica.titulo)}** [{fmt_duracao(musica.duracao)}] "
                     f"- pedido por {curto(musica.pedido_por, 30)}"
@@ -1006,6 +1007,7 @@ class Jbleza(discord.Client):
         self._pronto = True
         print()
         print(f"JBLEZA conectado como {self.user}.")
+        print("[acao] Bot conectado ao Discord")
         for g in self.guilds:
             await self.sincronizar(g)
         convite = (
@@ -1129,6 +1131,7 @@ async def tocar(interaction: discord.Interaction, busca: str):
     esperando = t.ocupado() or len(t.fila) > 0
     for it in itens:
         t.fila.append(Musica(it["url"], it["titulo"], it["duracao"], interaction.user.display_name))
+        print(f"[acao] Na fila: {it['titulo']} (pedido por {interaction.user.display_name})")
 
     if len(itens) > 1:
         await interaction.followup.send(f"{len(itens)} musicas adicionadas a fila.")
@@ -1189,6 +1192,7 @@ async def pular(interaction: discord.Interaction):
     titulo = t.atual.titulo
     t.ultimo_pulo = time.monotonic()
     t.vc.stop()
+    print(f"[acao] Musica pulada: {titulo}")
     await interaction.response.send_message(f"Pulei: **{curto(titulo)}**")
 
 
@@ -1200,6 +1204,7 @@ async def pausar(interaction: discord.Interaction):
         return
     if t.vc.is_playing():
         t.vc.pause()
+        print("[acao] Musica pausada")
         await interaction.response.send_message("Musica pausada. Use /continuar para voltar.")
     else:
         await interaction.response.send_message("Nao tem nada tocando para pausar.", ephemeral=True)
@@ -1213,6 +1218,7 @@ async def continuar(interaction: discord.Interaction):
         return
     if t.vc.is_paused():
         t.vc.resume()
+        print("[acao] Musica continuou")
         await interaction.response.send_message("Voltei a tocar.")
     else:
         await interaction.response.send_message("A musica nao esta pausada.", ephemeral=True)
@@ -1448,6 +1454,7 @@ async def executar_comando_chat(message: discord.Message, linha: str):
         esperando = t.ocupado() or len(t.fila) > 0
         for it in itens:
             t.fila.append(Musica(it["url"], it["titulo"], it["duracao"], quem))
+            print(f"[acao] Na fila: {it['titulo']} (pedido por {quem})")
         if len(itens) > 1:
             await dizer(f"{len(itens)} musicas adicionadas a fila (pedido de {curto(quem, 30)}).")
         elif esperando:
@@ -1501,11 +1508,13 @@ async def executar_comando_chat(message: discord.Message, linha: str):
         titulo = t.atual.titulo
         t.ultimo_pulo = time.monotonic()
         vc.stop()
+        print(f"[acao] Musica pulada por {quem}: {titulo}")
         await dizer(f"{curto(quem, 30)} pulou: **{curto(titulo)}**")
     elif cmd in ("pausar", "pause"):
         if vc.is_playing():
             vc.pause()
             t.pedir_painel()
+            print(f"[acao] Musica pausada por {quem}")
             await dizer("Musica pausada. Use `!continuar` para voltar.")
         else:
             await dizer("Nao tem nada tocando para pausar.")
@@ -1513,6 +1522,7 @@ async def executar_comando_chat(message: discord.Message, linha: str):
         if vc.is_paused():
             vc.resume()
             t.pedir_painel()
+            print(f"[acao] Musica continuou por {quem}")
             await dizer("Voltei a tocar.")
         else:
             await dizer("A musica nao esta pausada.")

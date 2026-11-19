@@ -63,6 +63,14 @@ public sealed class Plugin : IDalamudPlugin
     public Plugin()
     {
         Config = PluginInterface.GetPluginConfig() as Configuration ?? new Configuration();
+        // Seguranca: os dados de conexao so existem durante a sessao do personagem.
+        // Se o jogo esta abrindo (ninguem logado), qualquer sobra de sessao anterior e apagada.
+        var logado = false;
+        try { logado = ClientState.IsLoggedIn; } catch { /* servico ainda indisponivel: trata como nao logado */ }
+        if (logado) CofreConexao.Carregar(Config);
+        else CofreConexao.Apagar();
+        estavaLogado = logado;
+        PluginInterface.SavePluginConfig(Config); // tira do arquivo comum qualquer dado de versoes antigas
         Loc.Idioma = string.IsNullOrEmpty(Config.Idioma) ? "pt" : Config.Idioma;
         rpc = new DiscordRpc(Config, SalvarConfig, Chat);
         rpc.Conectou += () => EnviarComo("!painel"); // pede o estado atual do painel assim que conecta
@@ -84,14 +92,41 @@ public sealed class Plugin : IDalamudPlugin
         PluginInterface.UiBuilder.OpenConfigUi += AbrirJanela;
 
         _ = Task.Run(() => EnviosAsync(ctsEnvios.Token));
-
-        if (Config.ConectarAoAbrir && PodeConectar(out _)) Conectar();
     }
 
-    internal void SalvarConfig() => PluginInterface.SavePluginConfig(Config);
+    private bool estavaLogado;
+
+    internal void SalvarConfig()
+    {
+        PluginInterface.SavePluginConfig(Config);
+        CofreConexao.Salvar(Config);
+    }
+
+    /// <summary>Desconecta tudo e apaga os dados de conexao (codigo, Client ID/Secret, webhook, autorizacoes).</summary>
+    internal void EsquecerConexao()
+    {
+        try { Desconectar(); } catch { /* ignora */ }
+        try { Omne.Rpc.Stop(); } catch { /* ignora */ }
+        Config.ClientId = ""; Config.ClientSecret = ""; Config.AccessToken = ""; Config.WebhookUrl = "";
+        Config.Omne.ClientId = ""; Config.Omne.ClientSecret = ""; Config.Omne.AccessToken = ""; Config.Omne.ChannelId = "";
+        mainWindow.LimparCampos();
+        PluginInterface.SavePluginConfig(Config);
+        CofreConexao.Apagar();
+    }
+
+    /// <summary>Percebe o personagem entrando e saindo (sem depender do formato do evento do Dalamud).</summary>
+    private void VigiarLogin()
+    {
+        bool logado;
+        try { logado = ClientState.IsLoggedIn; } catch { return; }
+        if (logado == estavaLogado) return;
+        estavaLogado = logado;
+        EsquecerConexao(); // saiu do personagem OU entrou de novo: nunca fica nada guardado
+    }
 
     private void OnDraw()
     {
+        VigiarLogin();
         Capas.Limpar();
         windowSystem.Draw();
         Dialogos.Draw();
@@ -298,13 +333,6 @@ public sealed class Plugin : IDalamudPlugin
 
     private void OnComando(string command, string args) => mainWindow.IsOpen = !mainWindow.IsOpen;
 
-    /// <summary>Caminho do arquivo de configuracao do OMNE (para copiar Client ID e Secret).</summary>
-    internal string CaminhoConfigOmne()
-    {
-        var pasta = PluginInterface.ConfigDirectory.Parent?.FullName ?? "";
-        return Path.Combine(pasta, "OMNE.json");
-    }
-
     // ------------------------------------------------------------ conexao
 
     internal bool Conectado => tarefa is { IsCompleted: false };
@@ -439,5 +467,6 @@ public sealed class Plugin : IDalamudPlugin
         try { cts?.Cancel(); } catch { /* ignora */ }
         try { tarefa?.Wait(TimeSpan.FromSeconds(2)); } catch { /* ignora */ }
         cts?.Dispose();
+        CofreConexao.Apagar(); // ao descarregar o plugin ou fechar o jogo, nada fica guardado
     }
 }

@@ -8,7 +8,7 @@ For people who **will use** FFBL in game. If you are setting up the room on Disc
 
 - Final Fantasy XIV with **XIVLauncher/Dalamud**.
 - The **Discord app** open on the same PC (not just the browser).
-- Three items the **channel owner** will send you privately: **Client ID**, **Client Secret**, **webhook link** (treat it like a password!).
+- The **connection code** the **channel owner** will send you privately (starts with `FFBL1-`; treat it like a password!).
 - For the **screen** (optional): the **Penumbra** plugin and the **Plush Cushion** minion.
 
 > 🎧 **Just want to listen?** Nothing to install: join the Discord voice room.
@@ -29,7 +29,9 @@ https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 
 ## Step 3: connect
 1. Type `/ffbl` to open the iPod.
-2. On the connection screen fill in **Client ID**, **Client Secret** and **Webhook**.
+2. On the connection screen paste the **connection code** and click **Aplicar codigo** (apply code). It fills everything in.
+   - For **OMNE** (proximity voice): open the **OMNE** tab, turn it on and click **Conectar** (its details came with the code).
+   - 🔒 For safety, FFBL **forgets the code** whenever your character logs out (and when the game closes). Paste it again next time.
 3. Click **Connect**.
 4. Look at the **Discord** window and click **Authorize**.
 5. When it says *Connected as (your name)*, press **MENU** on the wheel to open the playlist.

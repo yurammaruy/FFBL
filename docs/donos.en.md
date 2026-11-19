@@ -45,20 +45,20 @@ The bot is a program that **runs on your computer**. **If it is closed, no music
 2. Download just the bot with one click: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Right-click the file → **Extract all**. (It is only a few files; no need to download the whole repository.)
 3. Double-click **`INSTALAR.bat`** (first time only; it downloads what the bot needs).
 4. Double-click **`INICIAR.bat`**. The **bot panel** opens.
-5. In the panel, paste the **bot token** and click **Save token**. Then click **Add room**, give it a name and paste the **voice room ID**. Rooms are remembered; **only one is on at a time**.
-6. Pick the room in the list and click **Turn on in this room**. If you **minimize** the panel, it goes next to the clock and the bot keeps playing. To change rooms, pick another and click the button again.
+5. In the panel, click **+ Nova sala** (new room). Fill in, in this order: **Nome do Canal** (channel name), **Nome da Sala** (room name), **Client ID**, **Client Secret**, **ID da SALA** (room ID), **Token do bot** and **Link do Webhook**. Click **Salvar** (save): the fields lock (use **Editar informacoes** to change them) and the **connection code** appears. Each room gets its own tab, and **only one is on at a time**.
+6. Click **Iniciar bot** (start bot) on the room's tab. If you **minimize** the panel, it goes next to the clock and the bot keeps playing. The **Basico** tab shows what the bot is doing in plain sentences; **Detalhado** shows everything.
 7. Join the voice room and type `/tocar` (or `!tocar song name` in the voice room's chat). The bot joins your room by itself. Use `/teste` to hear a beep and check the sound.
 
 > `token.txt` and `config.json` stay **only on your computer** and are already blocked by `.gitignore`.
 
 ## Part 3: give the details to your group
 
-Send each player **privately**:
+In the bot panel, on the room's tab, use the **Copiar** button under the **connection code** and send it **privately** to each player:
 
-1. **Client ID**
-2. **Client Secret**
-3. **Webhook link**
-4. A reminder to **accept the tester invite** (if using OMNE)
+1. The **connection code** (starts with `FFBL1-`). It already carries the Client ID, Client Secret, webhook link and the OMNE room, so nothing else needs to be sent.
+2. A reminder to **accept the tester invite** (if using OMNE)
+
+> The code works like a password: whoever has it can post in the room. If it leaks, delete the webhook in Discord and generate the code again. FFBL **forgets the code** whenever the character logs out, so players paste it again each session.
 
 Then point them to the [Player guide](usuarios.en.md).
 

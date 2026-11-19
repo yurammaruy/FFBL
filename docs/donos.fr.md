@@ -45,20 +45,20 @@ Le bot est un programme qui **tourne sur votre ordinateur**. **Fermé, il ne jou
 2. Téléchargez uniquement le bot en un clic : [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clic droit sur le fichier → **Extraire tout**. (Seulement quelques fichiers ; inutile de télécharger tout le dépôt.)
 3. Double-cliquez sur **`INSTALAR.bat`** (première fois uniquement ; il télécharge ce dont le bot a besoin).
 4. Double-cliquez sur **`INICIAR.bat`**. Le **panneau du bot** s'ouvre.
-5. Dans le panneau, collez le **token du bot** et cliquez sur **Salvar token** (enregistrer le token). Puis **Adicionar sala** (ajouter un salon), donnez un nom et collez l'**identifiant du salon vocal**. Les salons sont mémorisés ; **un seul est actif à la fois**.
-6. Choisissez le salon dans la liste et cliquez sur **Ligar nesta sala** (démarrer dans ce salon). Si vous **réduisez** le panneau, il va près de l'horloge et le bot continue. Pour changer de salon, choisissez-en un autre et cliquez à nouveau.
+5. Dans le panneau, cliquez sur **+ Nova sala** (nouveau salon) et remplissez dans l'ordre : **Nome do Canal** (nom du canal), **Nome da Sala** (nom du salon), **Client ID**, **Client Secret**, **ID da SALA** (identifiant du salon), **Token do bot** et **Link do Webhook**. Cliquez sur **Salvar** (enregistrer) : les champs se verrouillent (pour modifier, **Editar informacoes**) et le **code de connexion** apparaît. Chaque salon a son onglet ; **un seul est actif à la fois**.
+6. Cliquez sur **Iniciar bot** (démarrer le bot) dans l'onglet du salon. Si vous **réduisez** le panneau, il va près de l'horloge et le bot continue. L'onglet **Basico** montre en phrases simples ce que fait le bot ; **Detalhado** montre tout.
 7. Rejoignez le salon vocal et tapez `/tocar` (ou `!tocar nom du morceau` dans le chat du salon vocal). Le bot vous rejoint tout seul. `/teste` joue un bip pour vérifier le son.
 
 > `token.txt` et `config.json` restent **uniquement sur votre ordinateur** et sont déjà bloqués par `.gitignore`.
 
 ## Partie 3 : transmettre les infos au groupe
 
-Envoyez **en privé** à chaque joueur :
+Dans le panneau du bot, dans l'onglet du salon, utilisez le bouton **Copiar** sous le **code de connexion** et envoyez-le **en privé** à chaque joueur :
 
-1. **Client ID**
-2. **Client Secret**
-3. **Lien webhook**
-4. Un rappel d'**accepter l'invitation de testeur** (si OMNE)
+1. Le **code de connexion** (commence par `FFBL1-`). Il contient déjà Client ID, Client Secret, lien webhook et le salon OMNE ; rien d'autre à envoyer.
+2. Un rappel d'**accepter l'invitation de testeur** (si OMNE)
+
+> Le code fonctionne comme un mot de passe : celui qui l'a peut écrire dans le salon. S'il fuite, supprimez le webhook dans Discord et regénérez le code. FFBL **oublie le code** dès que le personnage se déconnecte ; les joueurs le recollent à chaque session.
 
 Puis renvoyez-les vers le [Guide du joueur](usuarios.fr.md).
 

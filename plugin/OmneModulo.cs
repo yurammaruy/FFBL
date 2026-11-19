@@ -143,33 +143,8 @@ internal sealed class OmneModulo : IDisposable
     private void Conexao(float largura)
     {
         var rpc = Rpc;
-        ImGui.Text(Loc.T("Client ID (do portal do Discord)"));
-        ImGui.SetNextItemWidth(largura);
-        var id = Cfg.ClientId;
-        if (ImGui.InputText("##omneid", ref id, 64)) Cfg.ClientId = id.Trim();
-
-        ImGui.Text(Loc.T("Client Secret (do portal do Discord)"));
-        ImGui.SetNextItemWidth(largura);
-        var seg = Cfg.ClientSecret;
-        if (ImGui.InputText("##omnesecret", ref seg, 128, ImGuiInputTextFlags.Password)) Cfg.ClientSecret = seg.Trim();
-
-        if (string.IsNullOrEmpty(Cfg.ClientId) && !string.IsNullOrEmpty(plugin.Config.ClientId)
-            && ImGui.Button(Loc.T("Usar o mesmo Client ID e Secret do FFBL")))
-        {
-            Cfg.ClientId = plugin.Config.ClientId;
-            Cfg.ClientSecret = plugin.Config.ClientSecret;
-            plugin.SalvarConfig();
-        }
-
-        ImGui.Text(Loc.T("ID da sala de voz do OMNE"));
-        ImGui.SetNextItemWidth(largura);
-        var sala = Cfg.ChannelId;
-        if (ImGui.InputText("##omnesala", ref sala, 128))
-        {
-            Cfg.ChannelId = ExtrairId(sala);
-            plugin.SalvarConfig();
-        }
-        ImGui.TextColored(Cinza, Loc.T("No Discord: botao direito na sala > Copiar ID do canal."));
+        if (string.IsNullOrEmpty(Cfg.ClientId) || string.IsNullOrEmpty(Cfg.ChannelId))
+            ImGui.TextColored(Aviso, Loc.T("Cole o codigo de conexao na aba FFBL para preencher os dados do OMNE."));
 
         if (!rpc.Running)
         {

@@ -62,7 +62,7 @@
 https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 ```
 
-主催者から**Client ID**、**Client Secret**、**Webhookリンク**を受け取ってください。
+主催者から**接続コード**（`FFBL1-`で始まります）を受け取り、FFBLに貼り付けると、すべて自動で入力されます。
 
 ## 🏠 自分のルームを作りたい！（チャンネルオーナー）
 

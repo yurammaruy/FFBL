@@ -66,7 +66,7 @@ Resumo: no Dalamud, `/xlsettings` → **Experimental** → **Repositórios perso
 https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 ```
 
-Quem organiza o grupo vai te passar três coisas: **Client ID**, **Client Secret** e o **link do webhook**.
+Quem organiza o grupo vai te passar um **código de conexão** (começa com `FFBL1-`). Você cola ele no FFBL e tudo é preenchido sozinho.
 
 ## 🏠 Quero montar na minha sala! (donos do canal)
 

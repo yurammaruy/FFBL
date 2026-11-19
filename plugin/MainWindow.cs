@@ -184,18 +184,6 @@ internal sealed class MainWindow : Window, IDisposable
 
         ImGui.Separator();
 
-        if (File.Exists(plugin.CaminhoConfigOmne()) && ImGui.Button(Loc.T("Copiar Client ID e Secret do OMNE")))
-        {
-            try
-            {
-                var no = JsonNode.Parse(File.ReadAllText(plugin.CaminhoConfigOmne()));
-                clientId = (string?)no?["ClientId"] ?? clientId;
-                clientSecret = (string?)no?["ClientSecret"] ?? clientSecret;
-                avisoConfig = "Copiei do OMNE.";
-            }
-            catch (Exception ex) { avisoConfig = "Nao consegui ler o OMNE: " + ex.Message; }
-        }
-
         var largura = (Tela.Z - Tela.X) * sc - 150;
 
         ImGui.Text(Loc.T("Codigo de conexao (quem criou a sala te passa)"));
@@ -212,7 +200,7 @@ internal sealed class MainWindow : Window, IDisposable
                 plugin.Config.Omne.ChannelId = d.SalaId;
                 plugin.SalvarConfig();
                 codigoConexao = "";
-                avisoConfig = "Codigo aplicado. Agora clique em Conectar.";
+                avisoConfig = "Codigo aplicado. Agora clique em Conectar. Os dados so ficam guardados enquanto o personagem estiver logado.";
             }
             else avisoConfig = erroCodigo;
         }
@@ -225,13 +213,6 @@ internal sealed class MainWindow : Window, IDisposable
         ImGui.InputText("Client Secret", ref clientSecret, 128, ImGuiInputTextFlags.Password);
         ImGui.SetNextItemWidth(largura);
         ImGui.InputText("Webhook", ref webhook, 256, ImGuiInputTextFlags.Password);
-        }
-
-        var auto = plugin.Config.ConectarAoAbrir;
-        if (ImGui.Checkbox(Loc.T("Conectar sozinho ao abrir o jogo"), ref auto))
-        {
-            plugin.Config.ConectarAoAbrir = auto;
-            plugin.SalvarConfig();
         }
 
         var esc = plugin.Config.Escala;
@@ -416,6 +397,16 @@ internal sealed class MainWindow : Window, IDisposable
                 dono, plugin.NomeMapa(telao.Territorio), telao.Pos.X, telao.Pos.Z));
             if (!plugin.TelaoPermitido(telao))
                 ImGui.TextColored(cinza, Loc.T("Ele nao aparece no seu jogo porque voce desligou a opcao acima."));
+            else
+            {
+                ImGui.TextWrapped(string.IsNullOrEmpty(plugin.Minion.Estado) ? "..." : plugin.Minion.Estado);
+                if (ImGui.TreeNode(Loc.T("Detalhes tecnicos") + "##detespectador"))
+                {
+                    var linhas = plugin.Minion.Diario;
+                    for (var i = Math.Max(0, linhas.Length - 8); i < linhas.Length; i++) ImGui.TextColored(cinza, linhas[i]);
+                    ImGui.TreePop();
+                }
+            }
             ImGui.TextColored(cinza, Loc.T("Se essa pessoa saiu do jogo, voce pode liberar o telao."));
             if (ImGui.Button(Loc.T("Liberar telao") + "##liberartelao")) plugin.LiberarTelao();
             return;
@@ -732,6 +723,9 @@ internal sealed class MainWindow : Window, IDisposable
             }
         }
     }
+
+    /// <summary>Esvazia o que foi digitado/colado (usado quando os dados de conexao sao apagados).</summary>
+    internal void LimparCampos() { clientId = ""; clientSecret = ""; webhook = ""; codigoConexao = ""; }
 
     public void Dispose() { }
 }

@@ -45,20 +45,20 @@ Der Bot ist ein Programm, das **auf deinem Computer läuft**. **Ist es geschloss
 2. Nur den Bot mit einem Klick herunterladen: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Rechtsklick auf die Datei → **Alle extrahieren**. (Es sind nur wenige Dateien; das ganze Repository ist nicht nötig.)
 3. **`INSTALAR.bat`** doppelklicken (nur beim ersten Mal; lädt, was der Bot braucht).
 4. **`INICIAR.bat`** doppelklicken. Das **Bot-Fenster** öffnet sich.
-5. Im Fenster den **Bot-Token** einfügen und auf **Salvar token** (Token speichern) klicken. Dann **Adicionar sala** (Raum hinzufügen) klicken, einen Namen vergeben und die **ID des Sprachkanals** einfügen. Räume werden gespeichert; **nur einer ist gleichzeitig aktiv**.
-6. Den Raum in der Liste wählen und **Ligar nesta sala** (In diesem Raum starten) klicken. Beim **Minimieren** wandert das Fenster neben die Uhr, der Bot spielt weiter. Zum Wechseln einen anderen Raum wählen und erneut klicken.
+5. Im Fenster auf **+ Nova sala** (neuer Raum) klicken und der Reihe nach ausfüllen: **Nome do Canal** (Kanalname), **Nome da Sala** (Raumname), **Client ID**, **Client Secret**, **ID da SALA** (Raum-ID), **Token do bot** und **Link do Webhook**. Auf **Salvar** (speichern) klicken: Die Felder werden gesperrt (zum Ändern **Editar informacoes**) und der **Verbindungscode** erscheint. Jeder Raum hat einen eigenen Tab; **nur einer ist gleichzeitig aktiv**.
+6. Im Tab des Raums auf **Iniciar bot** (Bot starten) klicken. Beim **Minimieren** wandert das Fenster neben die Uhr, der Bot spielt weiter. Der Tab **Basico** zeigt in einfachen Sätzen, was der Bot tut; **Detalhado** zeigt alles.
 7. Den Sprachkanal betreten und `/tocar` eingeben eingeben (oder `!tocar Liedname` im Chat des Sprachkanals). Der Bot tritt selbst bei. Mit `/teste` hörst du einen Piepton und prüfst den Ton.
 
 > `token.txt` und `config.json` bleiben **nur auf deinem Computer** und sind in `.gitignore` bereits gesperrt.
 
 ## Teil 3: Daten an die Gruppe weitergeben
 
-Sende jedem Spieler **privat**:
+Im Bot-Fenster, im Tab des Raums, den Knopf **Copiar** unter dem **Verbindungscode** benutzen und den Code **privat** an jeden Spieler senden:
 
-1. **Client ID**
-2. **Client Secret**
-3. **Webhook-Link**
-4. Den Hinweis, die **Tester-Einladung anzunehmen** (bei OMNE)
+1. Der **Verbindungscode** (beginnt mit `FFBL1-`). Er enthält schon Client ID, Client Secret, Webhook-Link und den OMNE-Raum; sonst muss nichts gesendet werden.
+2. Den Hinweis, die **Tester-Einladung anzunehmen** (bei OMNE)
+
+> Der Code wirkt wie ein Passwort: Wer ihn hat, kann in den Raum schreiben. Bei einem Leak den Webhook in Discord löschen und den Code neu erzeugen. FFBL **vergisst den Code**, sobald sich der Charakter abmeldet; Spieler fügen ihn jede Sitzung neu ein.
 
 Dann verweise auf die [Spieleranleitung](usuarios.de.md).
 

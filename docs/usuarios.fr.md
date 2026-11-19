@@ -8,7 +8,7 @@ Pour celles et ceux qui **utilisent** FFBL en jeu. Pour monter le salon sur Disc
 
 - Final Fantasy XIV avec **XIVLauncher/Dalamud**.
 - L'**application Discord** ouverte sur le même PC (pas seulement le navigateur).
-- Trois éléments envoyés en privé par le **propriétaire** : **Client ID**, **Client Secret**, **lien webhook** (à traiter comme un mot de passe !).
+- Le **code de connexion** envoyé en privé par le **propriétaire** (commence par `FFBL1-` ; à traiter comme un mot de passe !).
 - Pour l'**écran** (optionnel) : le plugin **Penumbra** et la mascotte **Plush Cushion**.
 
 > 🎧 **Vous voulez juste écouter ?** Rien à installer : rejoignez le salon vocal Discord.
@@ -29,7 +29,9 @@ https://raw.githubusercontent.com/yurammaruy/FFBL/main/repo.json
 
 ## Étape 3 : se connecter
 1. Tapez `/ffbl` pour ouvrir l'iPod.
-2. Sur l'écran de connexion, renseignez **Client ID**, **Client Secret** et **Webhook**.
+2. Sur l'écran de connexion, collez le **code de connexion** et cliquez sur **Aplicar codigo** (appliquer le code). Tout se remplit tout seul.
+   - Pour **OMNE** (voix de proximité) : ouvrez l'onglet **OMNE**, activez-le et cliquez sur **Conectar** (les infos sont venues avec le code).
+   - 🔒 Par sécurité, FFBL **oublie le code** dès que votre personnage se déconnecte (et à la fermeture du jeu). Recollez-le la fois suivante.
 3. Cliquez sur **Connecter**.
 4. Regardez la fenêtre **Discord** et cliquez sur **Autoriser**.
 5. Quand *Connecté en tant que (votre nom)* s'affiche, appuyez sur **MENU** sur la molette pour ouvrir la playlist.

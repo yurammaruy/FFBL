@@ -45,20 +45,20 @@ O bot é um programa que **roda no seu computador**. **Se ele estiver fechado, n
 2. Baixe só o bot com um clique: [**FFBL-bot.zip**](https://github.com/yurammaruy/FFBL/releases/latest/download/FFBL-bot.zip). Clique com o botão direito no arquivo → **Extrair tudo**. (São poucos arquivos; não precisa baixar o repositório inteiro.)
 3. Dê dois cliques em **`INSTALAR.bat`** (só na primeira vez; ele baixa o que o bot precisa).
 4. Dê dois cliques em **`INICIAR.bat`**. Abre o **painel do bot**.
-5. No painel, cole o **token do bot** e clique em **Salvar token**. Depois clique em **Adicionar sala**, dê um nome e cole o **ID da sala de voz**. As salas ficam salvas; **só uma fica ligada por vez**.
-6. Escolha a sala na lista e clique em **Ligar nesta sala**. Se você **minimizar** o painel, ele vai para perto do relógio e o bot continua tocando. Para trocar de sala, escolha outra e clique em Ligar de novo.
+5. No painel, clique em **+ Nova sala**. Preencha, nesta ordem: **Nome do Canal**, **Nome da Sala**, **Client ID**, **Client Secret**, **ID da SALA**, **Token do bot** e **Link do Webhook**. Clique em **Salvar**: os campos ficam travados (para mudar, use **Editar informações**) e aparece o **código de conexão**. Cada sala ganha a sua aba, e **só uma fica ligada por vez**.
+6. Clique em **Iniciar bot** na aba da sala. Se você **minimizar** o painel, ele vai para perto do relógio e o bot continua tocando. A aba **Básico** mostra, em frases simples, o que o bot está fazendo; a **Detalhado** mostra tudo.
 7. Entre na sala de voz e digite `/tocar` (ou `!tocar nome da música` no chat da sala de voz). O bot entra sozinho na sua sala. Use `/teste` para ouvir um apito e conferir o som.
 
-> Os arquivos `token.txt` e `config.json` ficam **só no seu computador** e já estão bloqueados no `.gitignore`.
+> Os arquivos `token.txt`, `config.json` e `salas.json` ficam **só no seu computador** e já estão bloqueados no `.gitignore`. O **token do bot** nunca vai dentro do código de conexão.
 
 ## Parte 3: passar os dados ao grupo
 
-Envie **em privado** para cada jogador:
+No painel do bot, na aba da sala, use o botão **Copiar** abaixo do **código de conexão** e envie **em privado** para cada jogador:
 
-1. **Client ID**
-2. **Client Secret**
-3. **Link do webhook**
-4. Um aviso para **aceitar o convite de testador** (se usarem o OMNE)
+1. O **código de conexão** (começa com `FFBL1-`). Ele já leva Client ID, Client Secret, link do webhook e a sala do OMNE, então não precisa mandar mais nada separado.
+2. Um aviso para **aceitar o convite de testador** (se usarem o OMNE)
+
+> O código funciona como senha: quem o tem escreve na sala. Se ele vazar, apague o webhook no Discord e gere o código de novo. O FFBL **esquece o código** sempre que o personagem desconecta, então o jogador precisa colar de novo a cada sessão.
 
 Depois mande eles para o [Guia do jogador](usuarios.md).
 
